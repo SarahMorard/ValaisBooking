@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29403.142
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValaisRestaurantsConsolApp", "ValaisRestaurants\ValaisRestaurantsConsolApp.csproj", "{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{875531E6-1F93-4ED9-9148-60F4BD6806E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{875531E6-1F93-4ED9-9148-60F4BD6806E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{875531E6-1F93-4ED9-9148-60F4BD6806E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{875531E6-1F93-4ED9-9148-60F4BD6806E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{875531E6-1F93-4ED9-9148-60F4BD6806E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BFFCBC51-5764-4D52-90F9-E7297DE3BF34}
+	EndGlobalSection
+EndGlobal
