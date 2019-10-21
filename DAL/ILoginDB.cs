@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BLL
+namespace DAL
 {
-    class ICitiesManager
+    public interface ILoginDB
     {
     }
 }
