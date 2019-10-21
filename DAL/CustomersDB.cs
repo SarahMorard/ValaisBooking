@@ -5,12 +5,12 @@ using System.Text;
 
 using System.Data.SqlClient;
 
-namespace ValaisRestaurants
+namespace DAL
 {
-    class DishesDB
+    class CustomersDB
     {
         public IConfiguration Configuration { get; }
-        public DishesDB(IConfiguration configuration)
+        public CustomersDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }

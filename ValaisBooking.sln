@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValaisRestaurantsConsolApp", "ValaisRestaurants\ValaisRestaurantsConsolApp.csproj", "{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValaisRestaurants", "ValaisRestaurants\ValaisRestaurants.csproj", "{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{875531E6-1F93-4ED9-9148-60F4BD6806E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{A0AA7105-8A77-41A7-AA73-745C1BBE4FCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{54340BF8-FFF0-450D-9AAA-F6068DE626A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{F5AAE171-8A75-466B-A3A9-1341D92A2CF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +21,18 @@ Global
 		{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{875531E6-1F93-4ED9-9148-60F4BD6806E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{875531E6-1F93-4ED9-9148-60F4BD6806E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{875531E6-1F93-4ED9-9148-60F4BD6806E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{875531E6-1F93-4ED9-9148-60F4BD6806E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0AA7105-8A77-41A7-AA73-745C1BBE4FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0AA7105-8A77-41A7-AA73-745C1BBE4FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0AA7105-8A77-41A7-AA73-745C1BBE4FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0AA7105-8A77-41A7-AA73-745C1BBE4FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54340BF8-FFF0-450D-9AAA-F6068DE626A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54340BF8-FFF0-450D-9AAA-F6068DE626A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54340BF8-FFF0-450D-9AAA-F6068DE626A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54340BF8-FFF0-450D-9AAA-F6068DE626A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5AAE171-8A75-466B-A3A9-1341D92A2CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5AAE171-8A75-466B-A3A9-1341D92A2CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5AAE171-8A75-466B-A3A9-1341D92A2CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5AAE171-8A75-466B-A3A9-1341D92A2CF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

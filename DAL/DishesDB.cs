@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ValaisRestaurants
+using System.Data.SqlClient;
+
+namespace DAL
 {
-    class OrdersDB
+    class DishesDB
     {
         public IConfiguration Configuration { get; }
-        public OrdersDB(IConfiguration configuration)
+        public DishesDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }

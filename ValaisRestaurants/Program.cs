@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using DAL;
 
 namespace ValaisRestaurants
 {
@@ -15,9 +16,9 @@ namespace ValaisRestaurants
 
             var CityDB = new CitiesDB(Configuration);
 
-            //Console.WriteLine(" -- NEW CITY -- ");
-            //var newCity = cityDB.AddCity(new Cities { zip_code = 3976, name = "Sion"});
-            //Console.WriteLine($"ID: {newCity.idCities} Name: {newCity.name}");
+            /*Console.WriteLine(" -- NEW CITY -- ");
+            var newCity = CityDB.AddCity(new Cities { zip_code = 3976, name = "Sion"});
+            Console.WriteLine($"ID: {newCity.idCities} Name: {newCity.name}");*/
             var cities = CityDB.GetCities();
             foreach (var city in cities)
             {

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using FluentAssertions.Common;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using DTO;
 
-namespace ValaisRestaurants
+namespace DAL
 {
-    class CitiesDB
+    public class CitiesDB
     {
         public IConfiguration Configuration { get; }
 
