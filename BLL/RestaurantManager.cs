@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL
+namespace BLL
 {
-    public interface IStatus
+    class RestaurantManager
     {
     }
 }
