@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL
 {
-    class RestaurantsDB
+    public class RestaurantsDB
     {
         public IConfiguration Configuration { get; }
         public RestaurantsDB(IConfiguration configuration)

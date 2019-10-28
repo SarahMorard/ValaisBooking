@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    class Order_DishesDB
+    public class Order_DishesDB
     {
         public IConfiguration Configuration { get; }
         public Order_DishesDB(IConfiguration configuration)

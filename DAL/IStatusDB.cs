@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DAL
 {
-    public interface IStatus
+    public interface IStatusDB
     {
     }
 }

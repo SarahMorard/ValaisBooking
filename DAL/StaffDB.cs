@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL
 {
-    class StaffDB
+    public class StaffDB
     {
         public IConfiguration Configuration { get; }
         public StaffDB(IConfiguration configuration)

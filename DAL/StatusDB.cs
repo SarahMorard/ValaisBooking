@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL
 {
-    class StatusDB
+    public class StatusDB
     {
         public IConfiguration Configuration { get; }
         public StatusDB(IConfiguration configuration)
