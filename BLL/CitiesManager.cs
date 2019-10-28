@@ -16,12 +16,12 @@ namespace BLL
         {
             return CitiesDB.GetCities();
         }
-        public Cities GetHotelId(int id)
+        public Cities GetCityId(int id)
         {
             return CitiesDB.GetCityId(id);
         }
 
-        public Cities AddHotel(Cities city)
+        public Cities AddCity(Cities city)
         {
             return CitiesDB.AddCity(city);
         }
@@ -33,7 +33,7 @@ namespace BLL
 
         public int DeleteCity(int IdCity)
         {
-            return CitiesDB.DeleteHotel(IdCity);
+            return CitiesDB.DeleteCity(IdCity);
         }
 
     }

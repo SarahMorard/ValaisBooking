@@ -15,7 +15,7 @@ namespace DTO
         public string email { get; set; }
         public int cities_id { get; set; }
         public int orders_id { get; set; }
-        public int Login_id { get; set; }
+        public int login_id { get; set; }
         public override string ToString()
         {
             return $"{idStaff}|{firstName}|{lastName}|{address}|{phone_number}|{email}|{cities_id}|{orders_id}|{Login_id}";
