@@ -10,7 +10,10 @@ namespace BLL
     public class CitiesManager
     {
         public CitiesDB CitiesDB { get; }
-        public CitiesManager (IConfiguration configuration);
+        public CitiesManager (IConfiguration configuration)
+        {
+            CitiesDB = new CitiesDB(configuration);
+        }
 
         public List<Cities> GetCities()
         {
