@@ -9,7 +9,7 @@ namespace BLL
     public interface ICustomersManager
     {
         ICustomersManager CitiesDB { get; }
-        List<Customers> GetCustomer();
+        List<Customers> GetCustomers();
         Customers GetCustomerId(int id);
         Customers AddCustomer(Customers customer);
         int UpdateCustomer(Customers customer);

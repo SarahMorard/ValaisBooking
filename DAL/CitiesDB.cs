@@ -58,8 +58,41 @@ namespace DAL
             return results;
 
         }
+        public Cities GetCityId(int idCities)
+        {
+            Cities cities = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Cities where idCities = @idCities";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@idCities", idCities);
 
-        /*public Cities AddCity(Cities city)
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                             cities= new Cities();
+                            cities.idCities = (int)dr["idCities"];
+                            cities.zip_code = (int)dr["zip_code"];
+                            cities.name = (string)dr["name"];
+                        }
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return cities;
+        }
+        public Cities AddCity(Cities city)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -89,7 +122,67 @@ namespace DAL
 
             return city;
 
-        }*/
+        }
+        public int UpdateCity(Cities cities)
+        {
+            int resultat = 0;
+
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                    string query = "UPDATE Cities SET zip_code = @zip_code, name = @name WHERE idCities=@id";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", cities.idCities);
+                    cmd.Parameters.AddWithValue("@zip_code", cities.zip_code);
+                    cmd.Parameters.AddWithValue("@name", cities.name);
+                    cn.Open();
+
+                    resultat = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return resultat;
+        }
+        public int DeleteCity(int id)
+        {
+            int resultat = 0;
+
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                    string query = "DELETE FROM Cities WHERE idCities=@id";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cn.Open();
+
+                    resultat = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return resultat;
+        }
+
 
     }
 }

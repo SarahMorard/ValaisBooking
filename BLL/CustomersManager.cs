@@ -16,17 +16,17 @@ namespace BLL
             CustomersDB = new CustomersDB(configuration);
         }
 
-        public List<Customers> GetCustomer()
+        public List<Customers> GetCustomers()
         {
-            return CustomersDB.GetHotels();
+            return CustomersDB.GetCustomers();
         }
 
         public Customers GetCustomerId(int id)
         {
-            return CustomersDB.GetHotelId(id);
+            return CustomersDB.GetCustomerId(id);
         }
 
-        public Customers AddHotel(Customers customer)
+        public Customers AddCustomer(Customers customer)
         {
             return CustomersDB.AddCustomer(customer);
         }
