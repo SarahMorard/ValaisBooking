@@ -9,5 +9,9 @@ namespace DTO
         public int idStatus { get; set; }
         public string status_name { get; set; }
         public bool status { get; set; }
+        public override string ToString()
+        {
+            return $"{idStatus}|{status_name}|{status}";
+        }
     }
 }

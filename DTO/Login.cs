@@ -9,6 +9,10 @@ namespace DTO
         public int idLogin { get; set; }
         public string login { get; set; }
         public string password { get; set; }
+        public override string ToString()
+        {
+            return $"{idLogin}|{login}|{password}";
+        }
 
     }
 }

@@ -12,6 +12,10 @@ namespace DTO
         public string address { get; set; }
         public int phone_number { get; set; }
         public string email { get; set; }
+        public override string ToString()
+        {
+            return $"{idCustomers}|{firstName}|{lastName}|{address}|{phone_number}|{email}";
+        }
 
     }
 }

@@ -11,6 +11,10 @@ namespace DTO
         public double price { get; set; }
         public TimeSpan time { get; set; }
         public int Status_id { get; set; }
+        public override string ToString()
+        {
+            return $"{idDishes}|{name}|{price}|{time}|{Status_id}";
+        }
 
     }
 }
