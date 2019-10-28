@@ -16,6 +16,7 @@ namespace DAL
             Configuration = configuration;
         }
 
+
         public List<Customers> GetCustomers()
         {
             List<Customers> results = null;
