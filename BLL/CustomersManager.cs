@@ -36,7 +36,7 @@ namespace BLL
             return CustomersDB.UpdateCustomer(customer);
         }
 
-        public int DeleteCustomer(int IdHotel)
+        public int DeleteCustomer(int IdCustomer)
         {
             return CustomersDB.DeleteCustomer(IdCustomer);
         }

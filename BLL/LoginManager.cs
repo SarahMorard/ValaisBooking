@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    class LoginManager
+    public class LoginManager
     {
         public ILoginDB LoginDB{ get; }
 
@@ -16,27 +16,27 @@ namespace BLL
             LoginDB = new LoginDB(configuration);
         }
 
-        public List<Login> GetHotels()
+        public List<Login> GetLogins()
         {
-            return LoginDB.GetLogin();
+            return LoginDB.GetLogins();
         }
 
-        public Login GetHotelId(int id)
+        public Login GetLoginId(int id)
         {
             return LoginDB.GetLoginId(id);
         }
 
-        public Login AddHotel(Login hotel)
+        public Login AddLogin(Login login)
         {
-            return LoginDB.AddLogin(hotel);
+            return LoginDB.AddLogin(login);
         }
 
-        public int UpdateHotel(Login login)
+        public int UpdateLogin(Login login)
         {
             return LoginDB.UpdateLogin(login);
         }
 
-        public int DeleteHotel(int IdLogin)
+        public int DeleteLogin(int IdLogin)
         {
             return LoginDB.DeleteLogin(IdLogin);
         }

@@ -28,7 +28,7 @@ namespace BLL
 
         public Status AddStatus(Status status)
         {
-            return StatusDB.AddHotel(status);
+            return StatusDB.AddStatus(status);
         }
 
         public int UpdateStatus(Status status)

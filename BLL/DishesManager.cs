@@ -16,27 +16,27 @@ namespace BLL
             DishesDB = new DishesDB(configuration);
         }
 
-        public List<Dishes> GetHotels()
+        public List<Dishes> GetDishes()
         {
-            return DishesDB.GetDish();
+            return DishesDB.GetDishes();
         }
 
-        public Dishes GetHotelId(int id)
+        public Dishes GetDishId(int id)
         {
             return DishesDB.GetDishId(id);
         }
 
-        public Dishes AddHotel(Dishes dish)
+        public Dishes AddDish(Dishes dish)
         {
             return DishesDB.AddDish(dish);
         }
 
-        public int UpdateHotel(Dishes dish)
+        public int UpdateDish(Dishes dish)
         {
             return DishesDB.UpdateDish(dish);
         }
 
-        public int DeleteHotel(int IdDish)
+        public int DeleteDish(int IdDish)
         {
             return DishesDB.DeleteDish(IdDish);
         }

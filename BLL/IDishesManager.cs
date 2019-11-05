@@ -6,10 +6,10 @@ using DTO;
 
 namespace BLL
 {
-    public class IDishesManager
+     interface IDishesManager
     {
         IDishesManager dishesDB { get; }
-        List<Dishes> GetDish();
+        List<Dishes> GetDishes();
         Dishes GetDishId(int id);
         Dishes AddDish(Dishes dish);
         int UpdateDish(Dishes dish);

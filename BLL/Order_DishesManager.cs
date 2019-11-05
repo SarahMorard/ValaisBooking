@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    class Order_DishesManager
+   public class Order_DishesManager
     {
         public IOrder_DishesDB Order_DishesDB{ get; }
 
@@ -26,9 +26,9 @@ namespace BLL
             return Order_DishesDB.GetOrder_DishesId(id);
         }
 
-        public Order_Dishes AddOrder_Dishes(Order_Dishes hotel)
+        public Order_Dishes AddOrder_Dishes(Order_Dishes order_Dishes)
         {
-            return Order_DishesDB.AddOrder_Dishes(hotel);
+            return Order_DishesDB.AddOrder_Dishes(order_Dishes);
         }
 
         public int UpdateOrder_Dishes(Order_Dishes order_Dishes)
