@@ -46,7 +46,7 @@ namespace DAL
                             staff.email = (String)dr["email"];
                             staff.cities_id = (int)dr["cities_id"];
                             staff.orders_id = (int)dr["orders_id"];
-                            staff.Login_id = (int)dr["Login_id"];
+                            staff.login_id = (int)dr["login_id"];
 
                             results.Add(staff);
 
@@ -93,7 +93,7 @@ namespace DAL
                             staff.email = (String)dr["email"];
                             staff.cities_id = (int)dr["cities_id"];
                             staff.orders_id = (int)dr["orders_id"];
-                            staff.Login_id = (int)dr["Login_id"];
+                            staff.login_id = (int)dr["login_id"];
 
                         }
                     }
@@ -114,7 +114,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Staff( idStaff, firstName, lastName, no_staff,address,phone_number,email,cities_id,orders_id,Login_id) values(@idStaff, @firstName,@lastName,@no_staff,@address,@phone_number,@email,@cities_id,@orders_id,@Login_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Staff( idStaff, firstName, lastName, no_staff,address,phone_number,email,cities_id,orders_id,Login_id) values(@idStaff, @firstName,@lastName,@no_staff,@address,@phone_number,@email,@cities_id,@orders_id,@login_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
@@ -126,7 +126,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@email", staff.email);
                     cmd.Parameters.AddWithValue("@cities_id", staff.cities_id);
                     cmd.Parameters.AddWithValue("@orders_id", staff.orders_id);
-                    cmd.Parameters.AddWithValue("@Login_id", staff.Login_id);
+                    cmd.Parameters.AddWithValue("@login_id", staff.login_id);
 
                     cn.Open();
 
@@ -166,7 +166,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@email", staff.email);
                     cmd.Parameters.AddWithValue("@cities_id", staff.cities_id);
                     cmd.Parameters.AddWithValue("@orders_id", staff.orders_id);
-                    cmd.Parameters.AddWithValue("@Login_id", staff.Login_id);
+                    cmd.Parameters.AddWithValue("@login_id", staff.login_id);
 
                     cn.Open();
 

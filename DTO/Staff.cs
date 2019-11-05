@@ -18,7 +18,7 @@ namespace DTO
         public int login_id { get; set; }
         public override string ToString()
         {
-            return $"{idStaff}|{firstName}|{lastName}|{address}|{phone_number}|{email}|{cities_id}|{orders_id}|{Login_id}";
+            return $"{idStaff}|{firstName}|{lastName}|{address}|{phone_number}|{email}|{cities_id}|{orders_id}|{login_id}";
         }
     }
 }

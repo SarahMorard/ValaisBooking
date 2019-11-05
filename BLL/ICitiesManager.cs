@@ -6,7 +6,7 @@ using DTO;
 
 namespace BLL
 {
-    interface ICitiesManager
+    public interface ICitiesManager 
     {
         ICitiesManager CitiesDB { get; }
         List<Cities> GetCities();

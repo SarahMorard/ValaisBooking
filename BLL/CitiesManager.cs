@@ -9,7 +9,9 @@ namespace BLL
 {
     public class CitiesManager
     {
-        public CitiesDB CitiesDB { get; }
+        
+        public ICitiesDB CitiesDB { get; }
+
         public CitiesManager (IConfiguration configuration)
         {
             CitiesDB = new CitiesDB(configuration);
@@ -39,5 +41,9 @@ namespace BLL
             return CitiesDB.DeleteCity(IdCity);
         }
 
+        public int UpdateCity(Cities city)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
