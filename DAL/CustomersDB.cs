@@ -8,7 +8,7 @@ using DTO;
 
 namespace DAL
 {
-    public class CustomersDB
+    public class CustomersDB : ICustomersDB
     {
         public IConfiguration Configuration { get; }
         public CustomersDB(IConfiguration configuration)
@@ -99,6 +99,100 @@ namespace DAL
                 throw e;
             }
             return customers;
+        }
+        public Customers AddCustomer(Customers customers)
+        {
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Insert into Customers(firstName, lastName, address, phone_number, email) values(@firstName, @lastName, @address, @phone_number, @email); SELECT SCOPE_IDENTITY()";
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@firstName", customers.firstName);
+                    cmd.Parameters.AddWithValue("@lastName", customers.lastName);
+                    cmd.Parameters.AddWithValue("@address", customers.address);
+                    cmd.Parameters.AddWithValue("@phone_number", customers.phone_number);
+                    cmd.Parameters.AddWithValue("@email", customers.email);
+
+                    cn.Open();
+
+                    customers.idCustomers = Convert.ToInt32(cmd.ExecuteScalar());
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return customers;
+        }
+        public int UpdateCustomer(Customers customers)
+        {
+            int resultat = 0;
+
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                    string query = "UPDATE Customers SET firstName = @firstName, lastName = @lastName, address=@address, phone_number=@phone_number, email=@email WHERE idCustomers=@id";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", customers.idCustomers);
+                    cmd.Parameters.AddWithValue("@firstName", customers.firstName);
+                    cmd.Parameters.AddWithValue("@lastName", customers.lastName);
+                    cmd.Parameters.AddWithValue("@address", customers.address);
+                    cmd.Parameters.AddWithValue("@phone_number", customers.phone_number);
+                    cmd.Parameters.AddWithValue("@email", customers.email);
+                    cn.Open();
+
+                    resultat = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return resultat;
+        }
+        public int DeleteCustomer(int id)
+        {
+            int resultat = 0;
+
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                    string query = "DELETE FROM Customers WHERE idCustomers=@id";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cn.Open();
+
+                    resultat = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return resultat;
         }
     }
 }

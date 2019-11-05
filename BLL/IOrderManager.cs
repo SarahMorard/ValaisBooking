@@ -9,10 +9,10 @@ namespace BLL
     public interface IOrderManager
     {
         IOrderManager OrderDB { get; }
-        List<Order> GetOrder();
-        Order GetOrderId(int id);
-        Order AddOrder(Order order);
-        int UpdateOrder(Order order);
-        int DeleteOrder(int IdOrder);
+        List<Orders> GetOrders();
+        Orders GetOrdersId(int id);
+        Orders AddOrders(Orders order);
+        int UpdateOrders(Orders order);
+        int DeleteOrders(int IdOrder);
     }
 }

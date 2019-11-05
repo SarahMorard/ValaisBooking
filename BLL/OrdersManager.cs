@@ -7,18 +7,18 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    class OrdersManager
+    public class OrdersManager
     {
-        public IOrderManager OrderDB { get; }
+        public IOrderDB OrdersDB { get; }
 
         public OrdersManager(IConfiguration configuration)
         {
             OrdersDB = new OrdersDB(configuration);
         }
 
-        public List<Orders> GetOrder()
+        public List<Orders> GetOrders()
         {
-            return OrdersDB.GetHotels();
+            return OrdersDB.GetOrders();
         }
 
         public Orders GetOrdersId(int id)

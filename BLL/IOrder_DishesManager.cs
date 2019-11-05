@@ -6,7 +6,7 @@ using DTO;
 
 namespace BLL
 {
-    public class IOrder_DishesManager
+    public interface IOrder_DishesManager
     {
         IOrder_DishesManager Order_DishesDB { get; }
         List<Order_Dishes> GetOrder_Dishes();
