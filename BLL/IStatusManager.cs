@@ -6,7 +6,7 @@ using DTO;
 
 namespace BLL
 {
-    public class IStatusManager
+    public interface IStatusManager
     {
         IStatusManager StatusDB { get; }
         List<Status> GetStatus();

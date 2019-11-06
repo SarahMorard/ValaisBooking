@@ -6,7 +6,7 @@ using DTO;
 
 namespace BLL
 {
-     interface IRestaurantManager
+    public interface IRestaurantManager
     {
         IRestaurantManager RestaurantDB { get; }
         List<Restaurants> GetRestaurant();

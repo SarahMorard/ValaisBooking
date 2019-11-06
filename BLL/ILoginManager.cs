@@ -6,7 +6,7 @@ using DTO;
 
 namespace BLL
 {
-        interface ILoginManager
+    public interface ILoginManager
     {
         ILoginManager LoginDB { get; }
         List<Login> GetLogin();
