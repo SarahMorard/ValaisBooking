@@ -9,7 +9,7 @@ namespace BLL
     public interface IStaffManager
     {
         IStaffManager StaffDB { get; }
-        List<Staff> GetStafft();
+        List<Staff> GetStaff();
         Staff GetStaffId(int id);
         Staff AddStaff(Staff staff);
         int UpdateStaff(Staff staff);

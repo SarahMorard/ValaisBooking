@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    class StaffManager
+    public class StaffManager
     {
         public IStaffDB StaffDB { get; }
 

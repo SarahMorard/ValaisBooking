@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    class StatusManager
+    public class StatusManager
     {
         public IStatusDB StatusDB { get; }
 
