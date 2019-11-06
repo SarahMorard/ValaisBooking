@@ -18,27 +18,28 @@ namespace ValaisRestaurants
 
             /* CITIES */
 
+                   
+          var CitiesManager = new CitiesManager(Configuration);
+        
+          var cities = CitiesManager.GetCities();
             // List the cities 
-            var CitiesManager = new CitiesManager(Configuration);
+            /*
+         foreach (var city in cities)
+         {
+             Console.WriteLine(city.ToString());
+         }
 
-            var cities = CitiesManager.GetCities();
-
-            foreach (var city in cities)
-            {
-                Console.WriteLine(city.ToString());
-            }
-
-            // Get one city
-            var cities2 = CitiesManager.GetCityId(1);
-            if (cities2 == null)
-            {
-                Console.WriteLine("Invalid ID");
-            }
-            else
-            {
-                Console.WriteLine(cities2.ToString());
-            }
-
+         // Get one city
+         var cities2 = CitiesManager.GetCityId(1);
+         if (cities2 == null)
+         {
+             Console.WriteLine("Invalid ID");
+         }
+         else
+         {
+             Console.WriteLine(cities2.ToString());
+         }
+         */
 
             // Add a new city
             Console.WriteLine(" -- NEW CITY -- ");
