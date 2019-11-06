@@ -39,7 +39,7 @@ namespace DAL
 
                             Cities cities = new Cities();
 
-                            cities.idCities = (int)dr["idCities"];
+                            cities.idCities = (int)dr["IdCities"];
                             cities.zip_code = (int)dr["zip_code"];
                             cities.name = (string)dr["name"];
 
@@ -134,7 +134,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Cities SET zip_code = @zip_code, name = @name WHERE idCities=@id";
+                    string query = "UPDATE Cities SET zip_code = @zip_code, name = @name WHERE IdCities=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);
@@ -164,7 +164,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "DELETE FROM Cities WHERE idCities=@id";
+                    string query = "DELETE FROM Cities WHERE IdCities=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);

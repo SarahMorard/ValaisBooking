@@ -17,12 +17,12 @@ namespace ValaisRestaurants
         {
 
             /* CITIES */
-            var CityDB = new CitiesDB(Configuration);
 
             // List the cities 
             var CitiesManager = new CitiesManager(Configuration);
 
-            var cities = CityDB.GetCities();
+            var cities = CitiesManager.GetCities();
+
             foreach (var city in cities)
             {
                 Console.WriteLine(city.ToString());
@@ -74,12 +74,11 @@ namespace ValaisRestaurants
 
             /*  CUSTOMER */
 
-            var CustomersDB = new CustomersDB(Configuration);
 
             // List the customer 
             var customersManager = new CustomersManager(Configuration);
 
-            var customers = CustomersDB.GetCustomers();
+            var customers = customersManager.GetCustomers();
             foreach (var customer in customers)
             {
                 Console.WriteLine(customer.ToString());
@@ -130,12 +129,11 @@ namespace ValaisRestaurants
             /*==================================================================================================*/
 
             /* DISHES */
-            var dishDB = new DishesDB(Configuration);
 
             // List the dishes 
             var dishManager = new DishesManager(Configuration);
 
-            var dishes = dishDB.GetDishes();
+            var dishes = dishManager.GetDishes();
             foreach (var dish in dishes)
             {
                 Console.WriteLine(dish.ToString());
@@ -186,12 +184,11 @@ namespace ValaisRestaurants
             /*==================================================================================================*/
 
             /* LOGIN */
-            var loginDB = new LoginDB(Configuration);
 
             // List the logins 
             var loginManager = new LoginManager(Configuration);
 
-            var logins = loginDB.GetLogins();
+            var logins = loginManager.GetLogins();
             foreach (var login in logins)
             {
                 Console.WriteLine(login.ToString());
@@ -242,12 +239,11 @@ namespace ValaisRestaurants
             /*==================================================================================================*/
 
             /* ORDER_DISHES */
-            var order_dishesDB = new Order_DishesDB(Configuration);
 
             // List the order_dishes 
             var order_dishesManager = new Order_DishesManager(Configuration);
 
-            var order_dishes = order_dishesDB.GetOrder_Dishes();
+            var order_dishes = order_dishesManager.GetOrder_Dishes();
             foreach (var order_dish in order_dishes)
             {
                 Console.WriteLine(order_dish.ToString());
@@ -298,12 +294,11 @@ namespace ValaisRestaurants
             /*==================================================================================================*/
 
             /* ORDERS */
-            var orderDB = new OrdersDB(Configuration);
 
             // List the orders 
             var ordersManager = new OrdersManager(Configuration);
 
-            var orders = orderDB.GetOrders();
+            var orders = ordersManager.GetOrders();
             foreach (var order in orders)
             {
                 Console.WriteLine(order.ToString());
@@ -354,12 +349,11 @@ namespace ValaisRestaurants
             /*==================================================================================================*/
 
             /* RESTAURANTS */
-            var restaurantDB = new RestaurantsDB(Configuration);
 
             // List the restaurants 
             var restaurantManager = new RestaurantManager(Configuration);
 
-            var restaurants = restaurantDB.GetRestaurants();
+            var restaurants = restaurantManager.GetRestaurants();
             foreach (var restaurant in restaurants)
             {
                 Console.WriteLine(restaurant.ToString());
@@ -410,12 +404,11 @@ namespace ValaisRestaurants
             /*==================================================================================================*/
 
             /* STAFF */
-            var staffDB = new StaffDB(Configuration);
 
             // List the staffs 
             var staffManager = new StaffManager(Configuration);
 
-            var staffs = staffDB.GetStaff();
+            var staffs = staffManager.GetStaff();
             foreach (var staff in staffs)
             {
                 Console.WriteLine(staff.ToString());
@@ -466,12 +459,11 @@ namespace ValaisRestaurants
             /*==================================================================================================*/
 
             /* STATUS */
-            var statusDB = new StatusDB(Configuration);
 
             // List the status 
             var statusManager = new StatusManager(Configuration);
 
-            var status = statusDB.GetStatus();
+            var status = statusManager.GetStatus();
             foreach (var stat in status)
             {
                 Console.WriteLine(stat.ToString());
@@ -511,7 +503,7 @@ namespace ValaisRestaurants
 
             //Delete status
             Console.WriteLine(" -- DELETE STATUS -- ");
-            statusManager.DeleteStatus(newCity.idCities);
+            statusManager.DeleteStatus(newStatus.idStatus);
             status = statusManager.GetStatus();
 
             foreach (var stat in status)
