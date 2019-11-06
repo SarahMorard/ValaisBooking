@@ -18,6 +18,7 @@ namespace ValaisRestaurants
 
             /* CITIES */
 
+
             // List the cities 
             var CitiesManager = new CitiesManager(Configuration);
 
