@@ -66,7 +66,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Cities where idCities = @idCities";
+                    string query = "Select * from Cities where IdCities = @idCities";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@idCities", idCities);
 
@@ -78,7 +78,7 @@ namespace DAL
                         if (dr.Read())
                         {
                              cities= new Cities();
-                            cities.idCities = (int)dr["idCities"];
+                            cities.idCities = (int)dr["IdCities"];
                             cities.zip_code = (int)dr["zip_code"];
                             cities.name = (string)dr["name"];
                         }
