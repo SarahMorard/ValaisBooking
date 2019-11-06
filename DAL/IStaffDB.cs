@@ -10,7 +10,7 @@ namespace DAL
         List<Staff> GetStaff();
         Staff GetStaffId(int idStaff);
         Staff AddStaff(Staff staff);
-        int UpdateStaff(Staff staff)
+        int UpdateStaff(Staff staff);
         int DeleteStaff(int id);
     }
 }

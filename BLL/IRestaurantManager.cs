@@ -6,13 +6,13 @@ using DTO;
 
 namespace BLL
 {
-    public class IRestaurantManager
+     interface IRestaurantManager
     {
         IRestaurantManager RestaurantDB { get; }
-        List<Restaurant> GetRestaurant();
-        Restaurant GetRestaurantId(int id);
-        Restaurant AddRestaurant(Restaurant restaurant);
-        int UpdateRestaurant(Restaurant restaurant);
+        List<Restaurants> GetRestaurant();
+        Restaurants GetRestaurantId(int id);
+        Restaurants AddRestaurant(Restaurants restaurant);
+        int UpdateRestaurant(Restaurants restaurant);
         int DeleteRestaurant(int IdRestaurant);
     }
 }
