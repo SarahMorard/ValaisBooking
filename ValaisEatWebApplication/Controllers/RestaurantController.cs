@@ -4,24 +4,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ValaisEatWebApplication.Models;
+using BLL;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace ValaisEatWebApplication.Controllers
 {
     public class RestaurantController : Controller
     {
-        public ActionResult GetRestaurants()// right clikc on the method, chose list and cityhotel to create the view
-                                       // model not in database
+        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+           .SetBasePath(Directory.GetCurrentDirectory())
+           .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
+           .Build();
+
+        public ActionResult GetRestaurants()
         {
-            
-
-            var restaurantList = new List<CityRestaurants> //change db here
-            {
-               
-            };
-
-
-            return View(restaurantList);
+            return View();
         }
         // GET: Restaurant
         public ActionResult Index()
@@ -32,6 +32,12 @@ namespace ValaisEatWebApplication.Controllers
         // GET: Restaurant/Details/5
         public ActionResult Details(int id)
         {
+            var citiesManager = new CitiesManager(Configuration);
+            var cities = new List<SelectListItem>
+            {
+             
+            };
+           
             return View();
         }
 
