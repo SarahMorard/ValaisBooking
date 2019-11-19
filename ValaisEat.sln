@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValaisRestaurants", "ValaisRestaurants\ValaisRestaurants.csproj", "{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValaisEat", "ValaisRestaurants\ValaisEat.csproj", "{EF24C9C6-2B7F-43BF-A01C-641375FED1DC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{54340BF8-FFF0-450D-9AAA-F6068DE626A6} = {54340BF8-FFF0-450D-9AAA-F6068DE626A6}
 	EndProjectSection
@@ -13,6 +13,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{54340BF8-FFF0-450D-9AAA-F6068DE626A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{F5AAE171-8A75-466B-A3A9-1341D92A2CF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValaisEatWebApplication", "ValaisEatWebApplication\ValaisEatWebApplication.csproj", "{88A977CA-837B-4B22-AAB2-04BE88CE3AA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{F5AAE171-8A75-466B-A3A9-1341D92A2CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5AAE171-8A75-466B-A3A9-1341D92A2CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5AAE171-8A75-466B-A3A9-1341D92A2CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A977CA-837B-4B22-AAB2-04BE88CE3AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A977CA-837B-4B22-AAB2-04BE88CE3AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A977CA-837B-4B22-AAB2-04BE88CE3AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A977CA-837B-4B22-AAB2-04BE88CE3AA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

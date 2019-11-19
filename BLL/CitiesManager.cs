@@ -43,7 +43,8 @@ namespace BLL
 
         public int UpdateCity(Cities city)
         {
-            throw new NotImplementedException();
+
+            return CitiesDB.UpdateCity(city);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace DAL
         {
             Configuration = configuration;
         }
+
+        //List all restaurants
         public List<Restaurants> GetRestaurants()
         {
             List<Restaurants> results = null;
@@ -39,6 +41,7 @@ namespace DAL
 
                             restaurants.idRestaurant = (int)dr["idRestaurant"];
                             restaurants.name = (String)dr["name"];
+                            restaurants.address = (String)dr["address"];
                             restaurants.city_id = (int)dr["city_id"];
                             restaurants.dishes_id = (int)dr["dishes_id"];
 
@@ -57,6 +60,8 @@ namespace DAL
             return results;
 
         }
+
+        //Get restaurant by id
         public Restaurants GetRestaurantsId(int idRestaurant)
         {
             Restaurants restaurants = null;
@@ -80,6 +85,7 @@ namespace DAL
                             restaurants = new Restaurants();
                             restaurants.idRestaurant = (int)dr["idRestaurant"];
                             restaurants.name = (String)dr["name"];
+                            restaurants.address = (String)dr["address"];
                             restaurants.city_id = (int)dr["city_id"];
                             restaurants.dishes_id = (int)dr["dishes_id"];
 
@@ -94,6 +100,8 @@ namespace DAL
             }
             return restaurants;
         }
+
+        //Add a new restaurant
         public Restaurants AddRestaurants(Restaurants restaurants)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -102,11 +110,12 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Restaurants( idRestaurant, name, city_id, dishes_id) values(@idRestaurant, @name,@city_id,@dishes_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Restaurants( idRestaurant, name, address, city_id, dishes_id) values(@idRestaurant, @name, @address ,@city_id,@dishes_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@name", restaurants.name);
+                    cmd.Parameters.AddWithValue("@address", restaurants.address);
                     cmd.Parameters.AddWithValue("@city_id", restaurants.city_id);
                     cmd.Parameters.AddWithValue("@dishes_id", restaurants.dishes_id);
 
@@ -124,6 +133,8 @@ namespace DAL
 
             return restaurants;
         }
+
+        //Update a restaurant
         public int UpdateRestaurants(Restaurants restaurants)
         {
             int resultat = 0;
@@ -135,12 +146,13 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Restaurants SET name = @name, city_id=@city_id,dishes_id=@dishes_id WHERE idRestaurant=@id";
+                    string query = "UPDATE Restaurants SET name = @name, address = @address, city_id=@city_id,dishes_id=@dishes_id WHERE idRestaurant=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", restaurants.idRestaurant);
                     cmd.Parameters.AddWithValue("@name", restaurants.name);
+                    cmd.Parameters.AddWithValue("@address", restaurants.address);
                     cmd.Parameters.AddWithValue("@city_id", restaurants.city_id);
                     cmd.Parameters.AddWithValue("@dishes_id", restaurants.dishes_id);
 
@@ -156,6 +168,8 @@ namespace DAL
 
             return resultat;
         }
+
+        //Delete a restaurant
         public int DeleteRestaurant(int id)
         {
             int resultat = 0;
