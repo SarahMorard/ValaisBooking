@@ -41,9 +41,5 @@ namespace BLL
             return CitiesDB.DeleteCity(IdCity);
         }
 
-        public int UpdateCity(Cities city)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -54,7 +54,7 @@ namespace ValaisRestaurants
             //Update a city
             Console.WriteLine(" -- UPDATE CITY -- ");
             newCity.name= "Sion";
-            CitiesManager.UpdateCity(newCity);
+            CitiesManager.UpdateCities(newCity);
             cities = CitiesManager.GetCities();
             foreach (var city in cities)
             {
@@ -154,7 +154,7 @@ namespace ValaisRestaurants
 
             // Add a new dishes
             Console.WriteLine(" -- NEW DISHES -- ");
-            var newDish = dishManager.AddDish(new Dishes { idDishes = 1,  name = "VisualBurger", price = 11.50});
+            var newDish = dishManager.AddDish(new Dishes {  name = "VisualBurger", price = 11.50,time= DateTime.Today });
             Console.WriteLine($"ID: {newDish.idDishes} name: {newDish.name} price: {newDish.price}");
             dishes = dishManager.GetDishes();
             foreach (var dish in dishes)

@@ -10,6 +10,7 @@ namespace BLL
     public class StatusManager
     {
         public IStatusDB StatusDB { get; }
+        public IDishesDB DishesDB { get; }
 
         public StatusManager(IConfiguration configuration)
         {
@@ -38,6 +39,7 @@ namespace BLL
 
         public int DeleteStatus(int IdStatus)
         {
+            DishesDB.DeleteDishFromFK(IdStatus);
             return StatusDB.DeleteStatus(IdStatus);
         }
     }

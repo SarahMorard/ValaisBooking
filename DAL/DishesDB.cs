@@ -17,7 +17,7 @@ namespace DAL
         }
         public List<Dishes> GetDishes()
         {
-            List<Dishes> results = null;
+            List<Dishes> results = new List<Dishes>();
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
@@ -33,8 +33,7 @@ namespace DAL
                     {
                         while (dr.Read())
                         {
-                            if (results == null)
-                                results = new List<Dishes>();
+                           
 
                             Dishes dishes = new Dishes();
 
@@ -106,7 +105,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Customers(idDishes, name, price, time, Status_id) values(@name, @price, @time, @Status_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Dishes( name, price, time, Status_id) values(@name, @price, @time, @Status_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
@@ -171,6 +170,8 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+               
+
 
                     string query = "DELETE FROM Dishes WHERE idDishes=@id";
 
@@ -190,7 +191,37 @@ namespace DAL
 
             return resultat;
         }
+        public int DeleteDishFromFK(int fk_status)
+        {
+            int resultat = 0;
 
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+
+
+                    string query = "DELETE FROM Dishes WHERE Status_id=@fk_status";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cn.Open();
+
+                    resultat = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return resultat;
+        }
 
     }
 

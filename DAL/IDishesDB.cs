@@ -13,5 +13,7 @@ namespace DAL
         Dishes AddDish(Dishes dishes);
         int UpdateDish(Dishes dishes);
         int DeleteDish(int id);
+        //gestion de la clés étrangeère 
+        int DeleteDishFromFK(int fk_status);
     }
 }
