@@ -41,5 +41,10 @@ namespace BLL
             return CitiesDB.DeleteCity(IdCity);
         }
 
+        public int UpdateCity(Cities city)
+        {
+
+            return CitiesDB.UpdateCity(city);
+        }
     }
 }
