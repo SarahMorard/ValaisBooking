@@ -22,7 +22,7 @@ namespace ValaisEatWebApplication.Controllers
             return View();
         }
 
-        // GET: Login/Create
+        // GET: Login/Create 
         public ActionResult Create()
         {
             return View();
