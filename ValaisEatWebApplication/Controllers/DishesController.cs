@@ -5,11 +5,157 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ValaisEatWebApplication.Models;
+using BLL;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using DTO;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ValaisEatWebApplication.Controllers
 {
     public class DishesController : Controller
     {
+        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+          .SetBasePath(Directory.GetCurrentDirectory())
+          .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
+          .Build();
+
+
+        //Get the italian dishes from the bdd front office according to their type
+        [HttpGet]
+        public ActionResult GetItalianDishes()                                                 
+        {      
+            var dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishes();
+
+
+            var dishList = new List<Dishes>();
+
+           foreach(Dishes dishes in dish)
+            {
+                if(dishes.type == "Italian")
+                {
+                    dishList.Add(dishes); //Filling the new dishes list
+                }
+            }   
+            return View(dishList);
+        }
+
+        //Get the Japanese dishes from the bdd front office according to their type
+        [HttpGet]
+        public ActionResult GetJapaneseDishes()
+        {
+            var dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishes();
+
+
+            var dishList = new List<Dishes>();
+
+            foreach (Dishes dishes in dish)
+            {
+                if (dishes.type == "Japanese")
+                {
+                    dishList.Add(dishes); //Filling the new dishes list
+                }
+            }
+            return View(dishList);
+        }
+
+        //Get the Greek dishes from the bdd front office according to their type
+        [HttpGet]
+        public ActionResult GetGreekDishes()
+        {
+            var dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishes();
+
+
+            var dishList = new List<Dishes>();
+
+            foreach (Dishes dishes in dish)
+            {
+                if (dishes.type == "Greek")
+                {
+                    dishList.Add(dishes); //Filling the new dishes list
+                }
+            }
+            return View(dishList);
+        }
+
+        //Get the indian dishes from the bdd front office according to their type
+        [HttpGet]
+        public ActionResult GetIndianDishes()
+        {
+            var dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishes();
+
+
+            var dishList = new List<Dishes>();
+
+            foreach (Dishes dishes in dish)
+            {
+                if (dishes.type == "Indian")
+                {
+                    dishList.Add(dishes); //Filling the new dishes list
+                }
+            }
+            return View(dishList);
+        }
+
+        //Get the korean dishes from the bdd front office according to their type
+        [HttpGet]
+        public ActionResult GetKoreanDishes()
+        {
+            var dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishes();
+
+
+            var dishList = new List<Dishes>();
+
+            foreach (Dishes dishes in dish)
+            {
+                if (dishes.type == "Korean")
+                {
+                    dishList.Add(dishes); //Filling the new dishes list
+                }
+            }
+            return View(dishList);
+        }
+
+        //Get the mexican dishes from the bdd front office according to their type
+        [HttpGet]
+        public ActionResult GetMexicanDishes()
+        {
+            var dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishes();
+
+
+            var dishList = new List<Dishes>();
+
+            foreach (Dishes dishes in dish)
+            {
+                if (dishes.type == "Mexican")
+                {
+                    dishList.Add(dishes); //Filling the new dishes list
+                }
+            }
+            return View(dishList);
+        }
+
+        public ActionResult listResto(int id)
+        {
+            var resto = new Restaurants();
+
+            var restaurants = new List<SelectListItem>
+            {
+                new SelectListItem {Value = "1", Text=resto.name},
+                new SelectListItem {Value = "2", Text=resto.name},
+                new SelectListItem {Value = "3", Text=resto.name}, //ask the bll for info in the db
+            };
+            ViewBag.Restaurants = restaurants;
+            ViewBag.Selected = 2;
+            return View();
+        }
+
         // GET: Dishes
         public ActionResult Index()
         {

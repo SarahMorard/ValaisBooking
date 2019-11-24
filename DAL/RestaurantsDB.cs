@@ -110,7 +110,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Restaurants( idRestaurant, name, address, city_id, dishes_id) values(@idRestaurant, @name, @address ,@city_id,@dishes_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Restaurants(name, address, city_id, dishes_id) values(@name, @address ,@city_id,@dishes_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 

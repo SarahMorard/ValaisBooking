@@ -1,16 +1,16 @@
-﻿@model ValaisEatWebApplication.Models.Restaurants
+﻿@model DTO.Restaurants
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Create";
 }
 
-<h2>Details</h2>
+<h2>Create</h2>
 
 <h4>Restaurants</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Details">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="idRestaurant" class="control-label"></label>
@@ -29,6 +29,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="city_id" class="control-label"></label>
+                <select asp-for="city_id" class="form-control" asp-items="@(new SelectList(ViewBag.Cities, "Value", "Text", ViewBag.Selected))"></select>
+
+
+
+                <span asp-validation-for="city_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="city_id" class="control-label"></label>
                 <input asp-for="city_id" class="form-control" />
                 <span asp-validation-for="city_id" class="text-danger"></span>
             </div>
@@ -38,7 +46,7 @@
                 <span asp-validation-for="dishes_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Post" class="btn btn-default" />
             </div>
         </form>
     </div>

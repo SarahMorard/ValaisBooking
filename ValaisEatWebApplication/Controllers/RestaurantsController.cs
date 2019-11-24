@@ -4,57 +4,53 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using ValaisEatWebApplication.Models;
 using BLL;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using DTO;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ValaisEatWebApplication.Controllers
 {
-    public class RestaurantController : Controller
+    public class RestaurantsController : Controller
     {
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-           .SetBasePath(Directory.GetCurrentDirectory())
-           .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
-           .Build();
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
+        .Build();
 
-        public ActionResult GetRestaurants()
-        {
-            return View();
-        }
-        // GET: Restaurant
+     
+
+        // GET: Restaurants
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Restaurant/Details/5
+        // GET: Restaurants/Details/5
         public ActionResult Details(int id)
         {
-            var citiesManager = new CitiesManager(Configuration);
-            var cities = new List<SelectListItem>
-            {
-             
-            };
-           
             return View();
+        }
+
+        // GET: Restaurants/Create
+        public ActionResult Create(Restaurants r)
+        {
+            Restaurants restaurants = r;
+
+            return View(restaurants);
         }
 
         [HttpPost]
-        public ActionResult Details(Restaurants r)
+        public ActionResult Post(Restaurants r)
         {
             Restaurants restaurants = r;
+
             return View();
         }
 
-        // GET: Restaurant/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Restaurant/Create
+        // POST: Restaurants/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -71,13 +67,13 @@ namespace ValaisEatWebApplication.Controllers
             }
         }
 
-        // GET: Restaurant/Edit/5
+        // GET: Restaurants/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Restaurant/Edit/5
+        // POST: Restaurants/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -94,13 +90,13 @@ namespace ValaisEatWebApplication.Controllers
             }
         }
 
-        // GET: Restaurant/Delete/5
+        // GET: Restaurants/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Restaurant/Delete/5
+        // POST: Restaurants/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

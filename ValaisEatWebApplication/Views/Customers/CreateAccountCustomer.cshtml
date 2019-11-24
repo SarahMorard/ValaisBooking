@@ -1,22 +1,18 @@
-﻿@model ValaisEatWebApplication.Models.Customers
+﻿@model DTO.Customers
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "CreateAccountCustomer";
 }
 
-<h2>Create your account</h2>
+<h2>CreateAccountCustomer</h2>
 
 <h4>Customers</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Details">
+        <form asp-action="CreateAccountCustomer">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="idCustomers" class="control-label"></label>
-                <input asp-for="idCustomers" class="form-control" />
-                <span asp-validation-for="idCustomers" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="firstName" class="control-label"></label>
                 <input asp-for="firstName" class="form-control" />
@@ -32,6 +28,16 @@
                 <input asp-for="address" class="form-control" />
                 <span asp-validation-for="address" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="city_id" class="control-label"></label>
+                <select asp-for="city_id" class="form-control" asp-items="@(new SelectList(ViewBag.Cities, "Value", "Text", ViewBag.Selected))"></select>
+
+
+
+                <span asp-validation-for="city_id" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="phone_number" class="control-label"></label>
                 <input asp-for="phone_number" class="form-control" />
@@ -41,16 +47,6 @@
                 <label asp-for="email" class="control-label"></label>
                 <input asp-for="email" class="form-control" />
                 <span asp-validation-for="email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="city_id" class="control-label"></label>
-                <input asp-for="city_id" class="form-control" />
-                <span asp-validation-for="city_id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="login_id" class="control-label"></label>
-                <input asp-for="login_id" class="form-control" />
-                <span asp-validation-for="login_id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

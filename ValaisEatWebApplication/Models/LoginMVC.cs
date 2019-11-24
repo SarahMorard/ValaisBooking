@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ValaisEatWebApplication.Models
 {
-    public class Login
+    public class LoginMVC
     {
         public int idLogin { get; set; }
         public string login { get; set; }
