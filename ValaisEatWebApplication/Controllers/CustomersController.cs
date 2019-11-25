@@ -5,37 +5,65 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ValaisEatWebApplication.Models;
+using BLL;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using DTO;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ValaisEatWebApplication.Controllers
 {
     public class CustomersController : Controller
     {
-        // GET: Customers
+        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+         .SetBasePath(Directory.GetCurrentDirectory())
+         .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
+         .Build();
+
+
+        //Listing the cities for the customers
+        public ActionResult listResto(int id)
+        {
+            var ctiyManager = new CitiesManager(Configuration);
+            var city = ctiyManager.GetCities();
+
+            var cities = new List<SelectListItem>();
+            
+            foreach (Cities c in city)
+            {
+                cities.Add(new SelectListItem { Value = c.idCities.ToString(), Text = c.name });
+            }         
+                      
+            ViewBag.Restaurants = cities;      
+            return View();
+        }
+
+        
+        public ActionResult CreateAccountCustomer(Customers c)
+        {
+            Customers customer = c;
+            return View(customer);
+        }
+
+        // GET: Customer
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Customers/Details/5
+        // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Details(Customers c)
-        {
-            Customers customers = c;
-            return View();
-        }
-
-        // GET: Customers/Create
+        // GET: Customer/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -52,13 +80,13 @@ namespace ValaisEatWebApplication.Controllers
             }
         }
 
-        // GET: Customers/Edit/5
+        // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Customers/Edit/5
+        // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -75,13 +103,13 @@ namespace ValaisEatWebApplication.Controllers
             }
         }
 
-        // GET: Customers/Delete/5
+        // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Customers/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

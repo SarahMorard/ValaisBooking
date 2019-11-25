@@ -17,7 +17,7 @@ namespace DAL
         }
         public List<Dishes> GetDishes()
         {
-            List<Dishes> results = new List<Dishes>();
+            List<Dishes> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
@@ -33,17 +33,15 @@ namespace DAL
                     {
                         while (dr.Read())
                         {
-                           
+                            if (results == null)
+                                results = new List<Dishes>();
 
                             Dishes dishes = new Dishes();
 
                             dishes.idDishes = (int)dr["idDishes"];
                             dishes.name = (string)dr["name"];
+                            dishes.type = (string)dr["type"];
                             dishes.price = (double)dr["price"];
-                            dishes.time = (DateTime)dr["time"];
-                            dishes.Status_id = (int)dr["Status_id"];
-                           
-
 
                             results.Add(dishes);
 
@@ -82,9 +80,8 @@ namespace DAL
                             dishes = new Dishes();
                             dishes.idDishes = (int)dr["idDishes"];
                             dishes.name = (string)dr["name"];
+                            dishes.type = (string)dr["type"];
                             dishes.price = (double)dr["price"];
-                            dishes.time = (DateTime)dr["time"];
-                            dishes.Status_id = (int)dr["Status_id"];
                            
                         }
                     }
@@ -105,14 +102,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Dishes( name, price, time, Status_id) values(@name, @price, @time, @Status_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Dishes(name, type, price) values(@name, @type, @price); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@name", dishes.name);
+                    cmd.Parameters.AddWithValue("@type", dishes.type);
                     cmd.Parameters.AddWithValue("@price", dishes.price);
-                    cmd.Parameters.AddWithValue("@time", dishes.time);
-                    cmd.Parameters.AddWithValue("@Status_id", dishes.Status_id);
 
                     cn.Open();
 
@@ -139,15 +135,15 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Dishes SET name = @name, price = @price, time=@time, Status_id=@Status_id WHERE idDishes=@id";
+                    string query = "UPDATE Dishes SET name = @name, type = @type, price = @price WHERE idDishes=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", dishes.idDishes);
+                    cmd.Parameters.AddWithValue("@type", dishes.type);
                     cmd.Parameters.AddWithValue("@name", dishes.name);
                     cmd.Parameters.AddWithValue("@price", dishes.price);
-                    cmd.Parameters.AddWithValue("@time", dishes.time);
-                    cmd.Parameters.AddWithValue("@Status_id", dishes.Status_id);             
+                    
                     cn.Open();
 
                     resultat = cmd.ExecuteNonQuery();
@@ -170,8 +166,6 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-               
-
 
                     string query = "DELETE FROM Dishes WHERE idDishes=@id";
 
@@ -191,37 +185,7 @@ namespace DAL
 
             return resultat;
         }
-        public int DeleteDishFromFK(int fk_status)
-        {
-            int resultat = 0;
 
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-
-
-
-                    string query = "DELETE FROM Dishes WHERE Status_id=@fk_status";
-
-
-                    SqlCommand cmd = new SqlCommand(query, cn);
-
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cn.Open();
-
-                    resultat = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return resultat;
-        }
 
     }
 

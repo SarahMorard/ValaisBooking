@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DTO;
 
 namespace ValaisEatWebApplication.Models
 {
-    public class CityRestaurants
+    public class DishesRestaurants
     {
-        public string city { get; set; }
-
-        public List<Restaurants> restaurants { get; set; }
+        public string restaurant { get; set; }
+        public List<Dishes> dishes { get; set; }
     }
 }
