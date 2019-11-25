@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DTO.Dishes>
+
+@{
+    ViewData["Title"] = "ListAllDishes";
+}
+
+<h2>ListAllDishes</h2>
+
+<p>
+    <button type="button" class="btn btn-info"><a asp-action="Create">Create New</a></button>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idDishes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idDishes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                <button type="button" class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id=item.idDishes})</button>
+                <button type="button" class="btn btn-warning">@Html.ActionLink("Details", "Details", new {id=item.idDishes})</button>
+                <button type="button" class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new {id=item.idDishes })</button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

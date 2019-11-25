@@ -42,7 +42,7 @@ namespace ValaisEatWebApplication.Controllers
         public ActionResult CreateAccountCustomer(Customers c)
         {
             Customers customer = c;
-            return View(customer);
+            return View();
         }
 
         // GET: Customer
