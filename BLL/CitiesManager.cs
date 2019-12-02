@@ -7,10 +7,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class CitiesManager
+    public class CitiesManager : ICitiesManager
     {
         
         public ICitiesDB CitiesDB { get; }
+
+        ICitiesManager ICitiesManager.CitiesDB => throw new NotImplementedException();
 
         public CitiesManager (IConfiguration configuration)
         {

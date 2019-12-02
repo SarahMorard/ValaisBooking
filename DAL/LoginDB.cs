@@ -181,6 +181,10 @@ namespace DAL
             return resultat;
         }
 
-
+        public bool IsUserValid(Login l)
+        {
+            // add sql statement to get user data from DB
+            return true;
+        }
     }
 }

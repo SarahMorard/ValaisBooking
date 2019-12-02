@@ -15,30 +15,13 @@ namespace ValaisEatWebApplication.Controllers
 {
     public class CustomersController : Controller
     {
-        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-         .SetBasePath(Directory.GetCurrentDirectory())
-         .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
-         .Build();
-
-
-        //Listing the cities for the customers
-        public ActionResult listResto(int id)
+        private IConfiguration Configuration { get; }
+        public CustomersController(IConfiguration configuration)
         {
-            var ctiyManager = new CitiesManager(Configuration);
-            var city = ctiyManager.GetCities();
-
-            var cities = new List<SelectListItem>();
-            
-            foreach (Cities c in city)
-            {
-                cities.Add(new SelectListItem { Value = c.idCities.ToString(), Text = c.name });
-            }         
-                      
-            ViewBag.Restaurants = cities;      
-            return View();
+            Configuration = configuration;
         }
 
-        
+
         public ActionResult CreateAccountCustomer(Customers c)
         {
             Customers customer = c;
@@ -57,27 +40,39 @@ namespace ValaisEatWebApplication.Controllers
             return View();
         }
 
-        // GET: Customer/Create
+        // List cities for the customers
         public ActionResult Create()
         {
+            var ctiyManager = new CitiesManager(Configuration);
+            var city = ctiyManager.GetCities();
+
+            var cities = new List<SelectListItem>();
+
+            foreach (Cities c in city)
+            {
+                cities.Add(new SelectListItem { Value = c.idCities.ToString(), Text = c.name });
+            }
+
+            ViewBag.Cities = cities;
             return View();
         }
 
-        // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(DTO.Customers customer)
         {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            ICustomersManager customerManager = new CustomersManager(Configuration);
+            customerManager.AddCustomer(customer);
+
+            return RedirectToAction(nameof(Confirmation));
+
+
+        }
+
+        public ActionResult Confirmation()
+        {
+            return View();
         }
 
         // GET: Customer/Edit/5

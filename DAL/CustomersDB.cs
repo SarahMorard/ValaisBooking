@@ -107,7 +107,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Customers(firstName, lastName, address, phone_number, email) values(@firstName, @lastName, @address, @phone_number, @email); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Customers(firstName, lastName, address, phone_number, email, city_id) values(@firstName, @lastName, @address, @phone_number, @email, @city_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
@@ -116,6 +116,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@address", customers.address);
                     cmd.Parameters.AddWithValue("@phone_number", customers.phone_number);
                     cmd.Parameters.AddWithValue("@email", customers.email);
+                    cmd.Parameters.AddWithValue("@city_id", customers.city_id);
 
                     cn.Open();
 
