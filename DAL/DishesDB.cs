@@ -186,7 +186,10 @@ namespace DAL
             return resultat;
         }
 
-
+        public int DeleteDishFromFK(int fk_status)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
