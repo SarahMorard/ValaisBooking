@@ -15,10 +15,11 @@ namespace ValaisEatWebApplication.Controllers
 {
     public class DishesController : Controller
     {
-        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-          .SetBasePath(Directory.GetCurrentDirectory())
-          .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
-          .Build();
+        private IConfiguration Configuration { get; }
+        public DishesController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
 
         //Get the italian dishes from the bdd front office according to their type
@@ -141,20 +142,6 @@ namespace ValaisEatWebApplication.Controllers
             return View(dishList);
         }
 
-        public ActionResult listResto(int id)
-        {
-            var resto = new Restaurants();
-
-            var restaurants = new List<SelectListItem>
-            {
-                new SelectListItem {Value = "1", Text=resto.name},
-                new SelectListItem {Value = "2", Text=resto.name},
-                new SelectListItem {Value = "3", Text=resto.name}, //ask the bll for info in the db
-            };
-            ViewBag.Restaurants = restaurants;
-            ViewBag.Selected = 2;
-            return View();
-        }
 
         //Display all the dishes on one page
         public ActionResult ListAllDishes()

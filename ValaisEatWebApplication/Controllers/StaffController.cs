@@ -5,11 +5,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ValaisEatWebApplication.Models;
+using BLL;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using DTO;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ValaisEatWebApplication.Controllers
 {
     public class StaffController : Controller
     {
+        private IConfiguration Configuration { get; }
+        public StaffController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         // GET: Staff
         public ActionResult Index()
         {
@@ -23,9 +34,9 @@ namespace ValaisEatWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Details(Staff s)
+        public ActionResult Details(DTO.Staff s)
         {
-            Staff staff = s;
+            DTO.Staff staff = s;
             return View();
         }
 

@@ -15,10 +15,11 @@ namespace ValaisEatWebApplication.Controllers
 {
     public class Order_dishesController : Controller
     {
-        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appSettings.json", optional: true, reloadOnChange: true)
-        .Build();
+        private IConfiguration Configuration { get; }
+        public Order_dishesController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         public ActionResult Index()
         {

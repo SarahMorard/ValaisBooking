@@ -7,9 +7,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class LoginManager
+    public class LoginManager : ILoginManager
     {
+
         public ILoginDB LoginDB{ get; }
+
+        ILoginManager ILoginManager.LoginDB => throw new NotImplementedException();
 
         public LoginManager(IConfiguration configuration)
         {
@@ -23,6 +26,7 @@ namespace BLL
 
         public Login GetLoginId(int id)
         {
+           
             return LoginDB.GetLoginId(id);
         }
 
@@ -39,6 +43,17 @@ namespace BLL
         public int DeleteLogin(int IdLogin)
         {
             return LoginDB.DeleteLogin(IdLogin);
+        }
+
+        public List<Login> GetLogin()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsUserValid(Login l)
+        {
+
+            return LoginDB.IsUserValid(l);
         }
     }
 }

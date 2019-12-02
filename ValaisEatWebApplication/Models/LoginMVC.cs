@@ -7,12 +7,7 @@ namespace ValaisEatWebApplication.Models
 {
     public class LoginMVC
     {
-        public int idLogin { get; set; }
         public string login { get; set; }
         public string password { get; set; }
-        public override string ToString()
-        {
-            return $"{idLogin}|{login}|{password}";
-        }
     }
 }

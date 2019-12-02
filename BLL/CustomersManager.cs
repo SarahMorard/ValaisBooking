@@ -7,9 +7,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class CustomersManager
+    public class CustomersManager : ICustomersManager
     {
         public ICustomersDB CustomersDB{ get; }
+
+        public ICustomersManager CitiesDB => throw new NotImplementedException();
 
         public CustomersManager(IConfiguration configuration)
         {
