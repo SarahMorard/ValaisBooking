@@ -24,8 +24,8 @@ namespace ValaisEatWebApplication.Controllers
         //Get the italian dishes from the bdd front office according to their type
         [HttpGet]
         public ActionResult GetItalianDishes()                                                 
-        {      
-            var dishesManager = new DishesManager(Configuration);
+        {
+            IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
 
@@ -45,7 +45,7 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult GetJapaneseDishes()
         {
-            var dishesManager = new DishesManager(Configuration);
+            IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
 
@@ -65,7 +65,7 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult GetGreekDishes()
         {
-            var dishesManager = new DishesManager(Configuration);
+            IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
 
@@ -85,7 +85,7 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult GetIndianDishes()
         {
-            var dishesManager = new DishesManager(Configuration);
+            IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
 
@@ -105,7 +105,7 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult GetKoreanDishes()
         {
-            var dishesManager = new DishesManager(Configuration);
+            IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
 
@@ -125,7 +125,7 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult GetMexicanDishes()
         {
-            var dishesManager = new DishesManager(Configuration);
+            IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
 
@@ -156,87 +156,89 @@ namespace ValaisEatWebApplication.Controllers
             return View();
         }
 
-        // GET: Dishes
-        public ActionResult Index()
+        //Display all the dishes on one page
+        public ActionResult ListAllDishes()
         {
-            return View();
+            IDishesManager dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishes();
+
+            return View(dish);
         }
 
-        // GET: Dishes/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public ActionResult Details(Dishes d)
-        {
-            Dishes dishes = d;
-            return View();
-        }
 
-        // GET: Dishes/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Dishes/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Dishes/Edit/5
+        // Edit the selected dish
         public ActionResult Edit(int id)
         {
+
+            IDishesManager dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishId(id);
+
+            return View(dish);
+        }
+
+        //post the new edited dish
+        [HttpPost]
+        public ActionResult Edit(DTO.Dishes d)
+        {
+            IDishesManager dishesManager = new DishesManager(Configuration);
+            dishesManager.UpdateDish(d);
+
+            return RedirectToAction(nameof(ListAllDishes)); 
+
+        }
+
+        // Details for one dish
+        public ActionResult Details(int id)
+        {
+            IDishesManager dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishId(id);
+
+            return View(dish);
+        }
+
+
+        // Display template to create a new dish
+        public ActionResult Create()
+        {
+
             return View();
         }
 
-        // POST: Dishes/Edit/5
+        // Creating a new dish in the db
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Create(DTO.Dishes dish)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            IDishesManager dishesManager = new DishesManager(Configuration);
+            dishesManager.AddDish(dish);
+
+            return RedirectToAction(nameof(ListAllDishes));
+
+
         }
 
-        // GET: Dishes/Delete/5
+        // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            IDishesManager dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetDishId(id);
+
+            return View(dish);
         }
 
-        // POST: Dishes/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                IDishesManager dishesManager = new DishesManager(Configuration);
+                dishesManager.DeleteDish(id);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListAllDishes));
             }
             catch
             {
