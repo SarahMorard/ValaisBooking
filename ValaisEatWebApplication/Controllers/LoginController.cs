@@ -10,15 +10,28 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using DTO;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
-namespace ValaisEatWebApplication.Controllers
+namespace WebApplication2.Controllers
 {
     public class LoginController : Controller
     {
-        private IConfiguration Configuration { get; }
-        public LoginController(IConfiguration configuration)
+        private ILoginManager LoginManager { get; }
+        public LoginController(ILoginManager loginManager)
         {
-            Configuration = configuration;
+            LoginManager = loginManager;
+        }
+
+
+        //if the login was successful, redirection to page Success
+        public IActionResult Success()
+        {
+            return View();
+        }
+
+        public IActionResult SuccessStaff()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -30,17 +43,39 @@ namespace ValaisEatWebApplication.Controllers
         [HttpPost]
         public IActionResult Index(Login l)
         {
-            LoginManager lMan = new LoginManager(Configuration);
-            bool isValid = lMan.IsUserValid(l);
-            if (isValid)
+            Login login = LoginManager.IsUserValid(l.login, l.password) ;
+            /*foreach Login l in log
+             * if login.id == l.id
+             * l.id == new var
+             * get id of costumer who is loged
+           */
+
+            if (login != null)
             {
-                return RedirectToAction("GetGreekDishes", "Dishes", new { isValid = isValid, user = "Sarah" });
+                if (login.type.Equals("customer"))
+                {
+                    HttpContext.Session.SetString("username", l.login); 
+                 
+                    return RedirectToAction(nameof(Success));
+                }
+                else
+                {
+                    HttpContext.Session.SetString("staffname", l.login);
+                    return RedirectToAction(nameof(SuccessStaff));
+                }
             }
             else
             {
                 return View();
             }
+            
+        }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
     }
-}
+  }

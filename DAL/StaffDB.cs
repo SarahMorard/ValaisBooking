@@ -114,7 +114,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Staff( idStaff, firstName, lastName, no_staff,address,phone_number,email,cities_id,orders_id,Login_id) values(@idStaff, @firstName,@lastName,@no_staff,@address,@phone_number,@email,@cities_id,@orders_id,@login_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Staff(firstName, lastName, no_staff,address,phone_number,email,cities_id,orders_id,Login_id) values(@firstName,@lastName,@no_staff,@address,@phone_number,@email,@cities_id,@orders_id,@login_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 

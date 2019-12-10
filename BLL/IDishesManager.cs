@@ -6,7 +6,7 @@ using DTO;
 
 namespace BLL
 {
-     public interface IDishesManager
+    public interface IDishesManager
     {
         IDishesManager dishesDB { get; }
         List<Dishes> GetDishes();
@@ -14,5 +14,6 @@ namespace BLL
         Dishes AddDish(Dishes dish);
         int UpdateDish(Dishes dish);
         int DeleteDish(int IdDish);
+        List<Dishes> GetListDishes(int id);
     }
 }

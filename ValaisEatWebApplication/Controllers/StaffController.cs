@@ -22,54 +22,82 @@ namespace ValaisEatWebApplication.Controllers
         }
 
         // GET: Staff
+        public ActionResult CreateAccountStaff(Staff s)
+        {
+            Staff staff= s;
+            return View();
+        }
+
+        // GET: Customer
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Staff/Details/5
+        // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Details(DTO.Staff s)
-        {
-            DTO.Staff staff = s;
-            return View();
-        }
-
-        // GET: Staff/Create
+        // List cities for the staff
         public ActionResult Create()
         {
+            var ctiyManager = new CitiesManager(Configuration);
+            var city = ctiyManager.GetCities();
+
+            var cities = new List<SelectListItem>();
+
+            foreach (Cities c in city)
+            {
+                cities.Add(new SelectListItem { Value = c.idCities.ToString(), Text = c.name });
+            }
+
+            ViewBag.Cities = cities;
             return View();
         }
 
-        // POST: Staff/Create
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(DTO.Staff staff, DTO.Login login)
         {
+
+            IStaffManager staffManager = new StaffManager(Configuration);
+
+            var loginManager = new LoginManager(Configuration);
+
+
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                staffManager.AddStaff(staff);
+                login.login = staff.email;
+                login.password = null;
+                var newLogin = loginManager.AddLogin(login);
+                return RedirectToAction(nameof(Confirmation));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Create));
+
             }
+
+
         }
 
-        // GET: Staff/Edit/5
+        public ActionResult Confirmation()
+        {
+            return View();
+        }
+
+        // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Staff/Edit/5
+        // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -86,13 +114,13 @@ namespace ValaisEatWebApplication.Controllers
             }
         }
 
-        // GET: Staff/Delete/5
+        // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Staff/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

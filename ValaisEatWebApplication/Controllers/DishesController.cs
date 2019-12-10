@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using DTO;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ValaisEatWebApplication.Controllers
 {
@@ -21,31 +22,44 @@ namespace ValaisEatWebApplication.Controllers
             Configuration = configuration;
         }
 
-
         //Get the italian dishes from the bdd front office according to their type
+        //Set the session so only users who are connected can access the italian menu page
         [HttpGet]
-        public ActionResult GetItalianDishes()                                                 
+        public ActionResult GetItalianDishes()
         {
-            IDishesManager dishesManager = new DishesManager(Configuration);
-            var dish = dishesManager.GetDishes();
-
-
-            var dishList = new List<Dishes>();
-
-           foreach(Dishes dishes in dish)
+            //get the session for customer
+            if (HttpContext.Session.GetString("username") == null)
             {
-                if(dishes.type == "Italian")
+                return RedirectToAction("Index", "Login");
+            }
+
+
+            IDishesManager dishesManager = new DishesManager(Configuration);
+
+                var dish = dishesManager.GetDishes();
+                var dishList = new List<Dishes>();
+
+                foreach (Dishes dishes in dish)
                 {
-                    dishList.Add(dishes); //Filling the new dishes list
+                    if (dishes.type == "Italian")
+                    {
+                        dishList.Add(dishes); 
+                    }
                 }
-            }   
-            return View(dishList);
+
+                return View(dishList);     
         }
 
         //Get the Japanese dishes from the bdd front office according to their type
         [HttpGet]
         public ActionResult GetJapaneseDishes()
         {
+            //Get the session for customer
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
@@ -66,6 +80,13 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult GetGreekDishes()
         {
+
+            //get the session for customer
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
@@ -86,6 +107,12 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult GetIndianDishes()
         {
+            //get the session for customer
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
@@ -106,6 +133,12 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult GetKoreanDishes()
         {
+            //get the session for customer
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
@@ -126,6 +159,12 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult GetMexicanDishes()
         {
+            //get the session for customer
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
@@ -146,12 +185,17 @@ namespace ValaisEatWebApplication.Controllers
         //Display all the dishes on one page
         public ActionResult ListAllDishes()
         {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishes();
 
             return View(dish);
         }
-
 
 
         // Edit the selected dish
@@ -171,7 +215,7 @@ namespace ValaisEatWebApplication.Controllers
             IDishesManager dishesManager = new DishesManager(Configuration);
             dishesManager.UpdateDish(d);
 
-            return RedirectToAction(nameof(ListAllDishes)); 
+            return RedirectToAction(nameof(ListAllDishes));
 
         }
 
@@ -206,7 +250,7 @@ namespace ValaisEatWebApplication.Controllers
 
         }
 
-        // GET: Customer/Delete/5
+        // delete dish
         public ActionResult Delete(int id)
         {
             IDishesManager dishesManager = new DishesManager(Configuration);
@@ -215,7 +259,7 @@ namespace ValaisEatWebApplication.Controllers
             return View(dish);
         }
 
-        // POST: Customer/Delete/5
+        // delete dish
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

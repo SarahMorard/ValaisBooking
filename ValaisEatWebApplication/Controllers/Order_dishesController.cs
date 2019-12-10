@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using DTO;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ValaisEatWebApplication.Controllers
 {
@@ -21,104 +22,41 @@ namespace ValaisEatWebApplication.Controllers
             Configuration = configuration;
         }
 
-        public ActionResult Index()
-        {
-
-            return View();
-        }
-
-        // Get order dishes from ddb to display it
         [HttpGet]
-        public ActionResult ListOrders()
+        public ActionResult ListOrderCustomer(Order_Dishes order_Dishes)
         {
-            var order_dishesManager = new Order_DishesManager(Configuration);
-            var od = order_dishesManager.GetOrder_Dishes();
-
-            var odList = new List<Order_Dishes>();
-
-            foreach (Order_Dishes order_dishes in od)
+            //get the session for customer
+            if (HttpContext.Session.GetString("staffname") == null)
             {
-              
-                odList.Add(order_dishes); 
-              
+                return RedirectToAction("Index", "Login");
             }
 
-            return View(odList);
+            var orderDishesManager = new Order_DishesManager(Configuration);
+
+            var listOrderDishes = orderDishesManager.GetOrder_Dishes();
+
+         
+
+            return View(listOrderDishes);
         }
 
-        // GET: Order_dishes/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult List()
         {
-            return View();
-        }
-
-        // GET: Order_dishes/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Order_dishes/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+  
+            //get the session for customer
+            if (HttpContext.Session.GetString("staffname") == null)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Login");
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: Order_dishes/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+            var orderDishesManager = new Order_DishesManager(Configuration);
 
-        // POST: Order_dishes/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+            var listOrderDishes = orderDishesManager.GetOrder_Dishes();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: Order_dishes/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: Order_dishes/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View(listOrderDishes);
         }
     }
 }

@@ -42,6 +42,7 @@ namespace DAL
                             dishes.name = (string)dr["name"];
                             dishes.type = (string)dr["type"];
                             dishes.price = (double)dr["price"];
+                            dishes.restaurant_id = (int)dr["restaurant_id"];
 
                             results.Add(dishes);
 
@@ -186,8 +187,55 @@ namespace DAL
             return resultat;
         }
 
+        public List<Dishes> GetListDishes(int id)
+        {
+            List<Dishes> results = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Dishes WHERE restaurant_id=@id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Dishes>();
+
+                            Dishes dishes = new Dishes();
+
+                            dishes.idDishes = (int)dr["idDishes"];
+                            dishes.name = (string)dr["name"];
+                            dishes.type = (string)dr["type"];
+                            dishes.price = (double)dr["price"];
+                            dishes.restaurant_id = (int)dr["restaurant_id"];
+
+                            results.Add(dishes);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+
+        }
+
 
     }
+
+
 
 
 }

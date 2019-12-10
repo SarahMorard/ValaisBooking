@@ -7,9 +7,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class RestaurantManager
+    public class RestaurantManager:IRestaurantManager
     {
         public IRestaurantDB RestaurantsDB{ get; }
+
+        public IRestaurantManager RestaurantDB => throw new NotImplementedException();
 
         public RestaurantManager(IConfiguration configuration)
         {
@@ -39,6 +41,26 @@ namespace BLL
         public int DeleteRestaurant(int IdRestaurant)
         {
             return RestaurantsDB.DeleteRestaurant(IdRestaurant);
+        }
+
+        public List<Restaurants> GetRestaurant()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Restaurants GetRestaurantId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Restaurants AddRestaurant(Restaurants restaurant)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateRestaurant(Restaurants restaurant)
+        {
+            throw new NotImplementedException();
         }
     }
 }

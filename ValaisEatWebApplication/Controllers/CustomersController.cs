@@ -57,16 +57,32 @@ namespace ValaisEatWebApplication.Controllers
             return View();
         }
 
+   
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DTO.Customers customer)
+        public ActionResult Create(DTO.Customers customer, DTO.Login login)
         {
-
+            
             ICustomersManager customerManager = new CustomersManager(Configuration);
-            customerManager.AddCustomer(customer);
 
-            return RedirectToAction(nameof(Confirmation));
+            var loginManager = new LoginManager(Configuration);   
+           
 
+            try
+            {
+                customerManager.AddCustomer(customer);
+                login.login = customer.email;
+                login.password = null;
+                var newLogin = loginManager.AddLogin(login);
+                return RedirectToAction(nameof(Confirmation));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Create));
+               
+            }
+            
 
         }
 
