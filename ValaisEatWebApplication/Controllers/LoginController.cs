@@ -95,7 +95,7 @@ namespace WebApplication2.Controllers
             var loginManager = new LoginManager(Configuration);
             var customerManager = new CustomersManager(Configuration);
 
-            //add the login foreign key
+            //add the login foreign key logn to the customer table
             int idFK = 0;
 
             var listLogin = loginManager.GetLogin();
