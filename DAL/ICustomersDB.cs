@@ -11,7 +11,7 @@ namespace DAL
         List<Customers> GetCustomers();
         Customers GetCustomerId(int idCustomers);
         Customers AddCustomer(Customers customers);
-        int UpdateCustomer(Customers customers);
+        int UpdateCustomer(int id, Customers customers);
         int DeleteCustomer(int id);
     }
 }

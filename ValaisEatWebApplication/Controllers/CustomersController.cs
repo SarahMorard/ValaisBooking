@@ -44,11 +44,11 @@ namespace ValaisEatWebApplication.Controllers
         public ActionResult Create(DTO.Customers customer)
         {
             var customerManager = new CustomersManager(Configuration);
-
+            
             try
             {
                 customerManager.AddCustomer(customer);
-                return RedirectToAction(nameof(Confirmation));
+                return RedirectToAction("Create","Login");
             }
             catch
             {
@@ -58,6 +58,7 @@ namespace ValaisEatWebApplication.Controllers
             
 
         }
+
 
         //if the account was successfully created, the customer will be redirected to this page
         public ActionResult Confirmation()

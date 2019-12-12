@@ -100,18 +100,23 @@ namespace ValaisEatWebApplication.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
-            /*foreach Login l in log
-            * if login.id == l.id
-            * l.id == new var
-            * get id of costumer who is loged
-            */
+            int idUSer = (int)HttpContext.Session.GetInt32("staffname");
+
             var orderDishesManager = new Order_DishesManager(Configuration);
 
             var listOrderDishes = orderDishesManager.GetOrder_Dishes();
+            var listOd = new List<Order_Dishes>();
 
-            string UserID = User.Identity.Name;
+            foreach (Order_Dishes od in listOrderDishes)
+            {
+                if(od.login_id == idUSer)
+                {
+                    listOd.Add(od);
+                }
+            }
 
-            return View(listOrderDishes);
+          
+            return View(listOd);
         }
     }
 }

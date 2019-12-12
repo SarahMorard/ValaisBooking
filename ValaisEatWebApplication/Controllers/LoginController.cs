@@ -47,20 +47,21 @@ namespace WebApplication2.Controllers
         public IActionResult Index(Login l)
         {
             var loginManager = new LoginManager(Configuration);
-            Login login = loginManager.IsUserValid(l.login, l.password) ;
-          
+            Login login = loginManager.IsUserValid(l.login, l.password) ;         
 
             if (login != null)
             {
+               
                 if (login.type.Equals("customer"))
                 {
-                    HttpContext.Session.SetString("username", l.login); 
-                 
+                    HttpContext.Session.SetString("username", login.login);
+                    HttpContext.Session.SetInt32("username", login.idLogin);
                     return RedirectToAction(nameof(Success));
                 }
                 else
                 {
-                    HttpContext.Session.SetString("staffname", l.login);
+                    HttpContext.Session.SetString("staffname", login.login);
+                    HttpContext.Session.SetInt32("staffname", login.idLogin);
                     return RedirectToAction(nameof(SuccessStaff));
                 }
             }
@@ -92,11 +93,25 @@ namespace WebApplication2.Controllers
         public ActionResult Create(DTO.Login login)
         {
             var loginManager = new LoginManager(Configuration);
+            var customerManager = new CustomersManager(Configuration);
 
+            //add the login foreign key
+            int idFK = 0;
+
+            var listLogin = loginManager.GetLogin();
+
+            foreach (Login l in listLogin)
+            {
+                if (l.idLogin > idFK)
+                {
+                    idFK = login.idLogin;
+                }
+            }
             try
             {
                 loginManager.AddLogin(login);
-                return RedirectToAction("Create","Customers");
+                //customerManager.UpdateCustomer();
+                return RedirectToAction("Confirmation", "Customers");
             }
             catch
             {
