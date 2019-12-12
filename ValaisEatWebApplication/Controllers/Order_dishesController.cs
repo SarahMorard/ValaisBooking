@@ -16,9 +16,10 @@ namespace ValaisEatWebApplication.Controllers
     public class Order_dishesController : Controller
     {
         private IConfiguration Configuration { get; }
-        public Order_dishesController(IConfiguration configuration)
+        private IOrder_DishesManager Order_DishesManager { get; }
+        public Order_dishesController(IOrder_DishesManager order_DishesManager)
         {
-            Configuration = configuration;
+            Order_DishesManager = order_DishesManager;
         }
 
         public ActionResult Index()
@@ -52,27 +53,19 @@ namespace ValaisEatWebApplication.Controllers
             return View();
         }
 
-        // GET: Order_dishes/Create
-        public ActionResult Create()
+        
+       
+        public ActionResult Create(int id, )
         {
-            return View();
-        }
+            Order_Dishes od = new Order_Dishes();
+            od.dishes_id = id;
 
-        // POST: Order_dishes/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
+            Order_DishesManager.AddOrder_Dishes(od);
+            
+           
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+          
+            
         }
 
         // GET: Order_dishes/Edit/5

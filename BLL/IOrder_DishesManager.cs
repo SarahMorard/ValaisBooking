@@ -11,7 +11,7 @@ namespace BLL
         IOrder_DishesManager Order_DishesDB { get; }
         List<Order_Dishes> GetOrder_Dishes();
         Order_Dishes GetOrder_DishesId(int id);
-        Order_Dishes AddOrder_Dishes(Login order_dishes);
+        Order_Dishes AddOrder_Dishes(Order_Dishes order_dishes);
         int UpdateOrder_Dishes(Order_Dishes order_dishes);
         int DeleteOrder_Dishes(int IdOrder_Dishes);
     }

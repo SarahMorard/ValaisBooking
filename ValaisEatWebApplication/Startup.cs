@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BLL;
+using DAL;
 
 namespace ValaisEatWebApplication
 {
@@ -30,7 +32,10 @@ namespace ValaisEatWebApplication
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            //j'ai ajouter ici les dépendences pour Order_dishies
+            services.AddSession();
+            services.AddScoped<IOrder_DishesManager, Order_DishesManager>();
+            services.AddScoped<IOrder_DishesDB, Order_DishesDB>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

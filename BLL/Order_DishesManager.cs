@@ -7,9 +7,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-   public class Order_DishesManager
+   public class Order_DishesManager:IOrder_DishesManager
     {
         public IOrder_DishesDB Order_DishesDB{ get; }
+
+        IOrder_DishesManager IOrder_DishesManager.Order_DishesDB => throw new NotImplementedException();
 
         public Order_DishesManager(IConfiguration configuration)
         {

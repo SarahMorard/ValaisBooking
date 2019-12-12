@@ -44,6 +44,7 @@ namespace DAL
                             restaurants.address = (String)dr["address"];
                             restaurants.city_id = (int)dr["city_id"];
                             restaurants.dishes_id = (int)dr["dishes_id"];
+                            restaurants.order_dishes_id = (int)dr["order_dishes_id"];
 
                             results.Add(restaurants);
 
@@ -88,6 +89,7 @@ namespace DAL
                             restaurants.address = (String)dr["address"];
                             restaurants.city_id = (int)dr["city_id"];
                             restaurants.dishes_id = (int)dr["dishes_id"];
+                            restaurants.order_dishes_id = (int)dr["order_dishes_id"];
 
                         }
                     }
@@ -110,7 +112,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Restaurants(name, address, city_id, dishes_id) values(@name, @address ,@city_id,@dishes_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Restaurants(name, address, city_id, dishes_id, order_dishes_id) values(@name, @address ,@city_id,@dishes_id,@order_dishes_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
@@ -118,6 +120,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@address", restaurants.address);
                     cmd.Parameters.AddWithValue("@city_id", restaurants.city_id);
                     cmd.Parameters.AddWithValue("@dishes_id", restaurants.dishes_id);
+                    cmd.Parameters.AddWithValue("@order_dishes_id", restaurants.order_dishes_id);
 
                     cn.Open();
 
@@ -146,7 +149,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Restaurants SET name = @name, address = @address, city_id=@city_id,dishes_id=@dishes_id WHERE idRestaurant=@id";
+                    string query = "UPDATE Restaurants SET name = @name, address = @address, city_id=@city_id,dishes_id=@dishes_id, order_dishes_id=@order_dishes_id WHERE idRestaurant=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);
@@ -155,7 +158,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@address", restaurants.address);
                     cmd.Parameters.AddWithValue("@city_id", restaurants.city_id);
                     cmd.Parameters.AddWithValue("@dishes_id", restaurants.dishes_id);
-
+                    cmd.Parameters.AddWithValue("@order_dishes_id", restaurants.order_dishes_id);
                     cn.Open();
 
                     resultat = cmd.ExecuteNonQuery();
