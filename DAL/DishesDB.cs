@@ -187,6 +187,7 @@ namespace DAL
             return resultat;
         }
 
+        //return lsit of dishes according to the id of the restaurant that was chosen
         public List<Dishes> GetListDishes(int id)
         {
             List<Dishes> results = null;

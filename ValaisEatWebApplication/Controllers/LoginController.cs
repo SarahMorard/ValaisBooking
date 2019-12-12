@@ -16,39 +16,39 @@ namespace WebApplication2.Controllers
 {
     public class LoginController : Controller
     {
-        private ILoginManager LoginManager { get; }
-        public LoginController(ILoginManager loginManager)
+        private IConfiguration Configuration { get; }
+        public LoginController(IConfiguration configuration)
         {
-            LoginManager = loginManager;
+            Configuration = configuration;
         }
 
 
-        //if the login was successful, redirection to page Success
+        //if the login customer was successful, redirection to page Success
         public IActionResult Success()
         {
             return View();
         }
 
+        //if the login staff was successful, redirection to page Success
         public IActionResult SuccessStaff()
         {
             return View();
         }
 
+        //Connection page
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        //login for staff member and customers
         [HttpPost]
         public IActionResult Index(Login l)
         {
-            Login login = LoginManager.IsUserValid(l.login, l.password) ;
-            /*foreach Login l in log
-             * if login.id == l.id
-             * l.id == new var
-             * get id of costumer who is loged
-           */
+            var loginManager = new LoginManager(Configuration);
+            Login login = loginManager.IsUserValid(l.login, l.password) ;
+          
 
             if (login != null)
             {
@@ -71,11 +71,40 @@ namespace WebApplication2.Controllers
             
         }
 
+        //Decconnection from the session
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        // List cities for the customers
+        public ActionResult Create()
+        {
+
+            return View();
+        }
+
+
+        //create a new login
+        [HttpPost]
+        public ActionResult Create(DTO.Login login)
+        {
+            var loginManager = new LoginManager(Configuration);
+
+            try
+            {
+                loginManager.AddLogin(login);
+                return RedirectToAction("Create","Customers");
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Create));
+
+            }
+
+
         }
     }
   }

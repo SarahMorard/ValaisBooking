@@ -44,7 +44,6 @@ namespace ValaisEatWebApplication.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
-            var dishLish = new List<Dishes>();
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetListDishes(id);
           

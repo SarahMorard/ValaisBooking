@@ -24,8 +24,8 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * from Order_Dishes";
-                    SqlCommand cmd = new SqlCommand(query, cn);
+                    string query = "Select * FROM Order_Dishes";
+                    SqlCommand cmd = new SqlCommand(query, cn);                 
 
                     cn.Open();
 
@@ -43,6 +43,7 @@ namespace DAL
                             order_Dishes.orders_id = (int)dr["orders_id"];
                             order_Dishes.customers_id = (int)dr["customers_id"];
                             order_Dishes.dishes_id = (int)dr["dishes_id"];
+                            order_Dishes.login_id = (int)dr["login_id"];
 
 
 
@@ -56,8 +57,7 @@ namespace DAL
             {
                 throw e;
             }
-           
-
+          
             return results;
 
         }
@@ -190,6 +190,7 @@ namespace DAL
             }
 
             return resultat;
-        }
+        }     
+
     }
 }

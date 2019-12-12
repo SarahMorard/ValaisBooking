@@ -44,8 +44,7 @@ namespace DAL
                             staff.address = (String)dr["address"];
                             staff.phone_number = (int)dr["phone_number"];
                             staff.email = (String)dr["email"];
-                            staff.cities_id = (int)dr["cities_id"];
-                            staff.orders_id = (int)dr["orders_id"];
+                            staff.cities_id = (int)dr["cities_id"];             
                             staff.login_id = (int)dr["login_id"];
 
                             results.Add(staff);
@@ -92,7 +91,6 @@ namespace DAL
                             staff.phone_number = (int)dr["phone_number"];
                             staff.email = (String)dr["email"];
                             staff.cities_id = (int)dr["cities_id"];
-                            staff.orders_id = (int)dr["orders_id"];
                             staff.login_id = (int)dr["login_id"];
 
                         }
@@ -114,7 +112,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Staff(firstName, lastName, no_staff,address,phone_number,email,cities_id,orders_id,Login_id) values(@firstName,@lastName,@no_staff,@address,@phone_number,@email,@cities_id,@orders_id,@login_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Staff(firstName, lastName, no_staff,address,phone_number,email,cities_id,Login_id) values(@firstName,@lastName,@no_staff,@address,@phone_number,@email,@cities_id,@login_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
@@ -125,7 +123,6 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@phone_number", staff.phone_number);
                     cmd.Parameters.AddWithValue("@email", staff.email);
                     cmd.Parameters.AddWithValue("@cities_id", staff.cities_id);
-                    cmd.Parameters.AddWithValue("@orders_id", staff.orders_id);
                     cmd.Parameters.AddWithValue("@login_id", staff.login_id);
 
                     cn.Open();
@@ -153,7 +150,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Staff SET firstName = @firstName, lastName=@lastName,no_staff=@no_staff,address=@address,phone_number=@phone_number,email=@email,cities_id=@cities_id,orders_id=@orders_id,Login_id=@Login_id WHERE idStaff=@id";
+                    string query = "UPDATE Staff SET firstName = @firstName, lastName=@lastName,no_staff=@no_staff,address=@address,phone_number=@phone_number,email=@email,cities_id=@cities_id,Login_id=@Login_id WHERE idStaff=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);
@@ -165,7 +162,6 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@phone_number", staff.phone_number);
                     cmd.Parameters.AddWithValue("@email", staff.email);
                     cmd.Parameters.AddWithValue("@cities_id", staff.cities_id);
-                    cmd.Parameters.AddWithValue("@orders_id", staff.orders_id);
                     cmd.Parameters.AddWithValue("@login_id", staff.login_id);
 
                     cn.Open();

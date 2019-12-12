@@ -13,5 +13,6 @@ namespace DAL
         Login AddLogin(Login login);
         int UpdateLogin(Login login);
         int DeleteLogin(int id);
+
     }
 }

@@ -21,24 +21,14 @@ namespace ValaisEatWebApplication.Controllers
             Configuration = configuration;
         }
 
-        // GET: Staff
+        // create account for staff
         public ActionResult CreateAccountStaff(Staff s)
         {
             Staff staff= s;
             return View();
         }
 
-        // GET: Customer
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Customer/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+       
 
         // List cities for the staff
         public ActionResult Create()
@@ -58,7 +48,7 @@ namespace ValaisEatWebApplication.Controllers
         }
 
 
-
+        //create a login
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(DTO.Staff staff, DTO.Login login)
@@ -86,55 +76,42 @@ namespace ValaisEatWebApplication.Controllers
 
         }
 
+        //Page of confirmation when the staff has usccessfully created their account
         public ActionResult Confirmation()
         {
             return View();
         }
 
-        // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+        //Archive the order once it was delivered
+        public ActionResult Archieve()
         {
             return View();
         }
 
-        // POST: Customer/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        
+
+        //get the list of order assigned to the staff
+        [HttpGet]
+        public ActionResult ListOrderCustomer()
         {
-            try
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Login");
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: Customer/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            /*foreach Login l in log
+            * if login.id == l.id
+            * l.id == new var
+            * get id of costumer who is loged
+            */
+            var orderDishesManager = new Order_DishesManager(Configuration);
 
-        // POST: Customer/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+            var listOrderDishes = orderDishesManager.GetOrder_Dishes();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            string UserID = User.Identity.Name;
+
+            return View(listOrderDishes);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace DAL
         {
             Configuration = configuration;
         }
+
         public List<Login> GetLogins()
         {
             List<Login> results = null;
@@ -100,12 +101,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Login(idLogin, login, password) values(@login, @password); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Login(login, password, type) values(@login, @password, @type); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@login", login.login);
                     cmd.Parameters.AddWithValue("@password", login.password);
+                    cmd.Parameters.AddWithValue("@type", login.type="customer");
 
                     cn.Open();
 
@@ -218,7 +220,7 @@ namespace DAL
                 throw e;
             }
             return result;
-        }     
+        }
     }
 }
 
