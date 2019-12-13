@@ -39,7 +39,7 @@ namespace DAL
                             Orders orders = new Orders();
 
                             orders.idOrders = (int)dr["idOrders"];
-                            orders.Status_id = (int)dr["Status_id"];
+                         
                           
                             results.Add(orders);
 
@@ -78,7 +78,7 @@ namespace DAL
                         {
                             orders = new Orders();
                             orders.idOrders = (int)dr["idOrders"];
-                            orders.Status_id = (int)dr["Status_id"];
+                           
                             
                         }
                     }
@@ -103,7 +103,7 @@ namespace DAL
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@Status_id", orders.Status_id);
+                   
                    
                     cn.Open();
 
@@ -135,7 +135,7 @@ namespace DAL
 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", orders.idOrders);
-                    cmd.Parameters.AddWithValue("@Status_id", orders.Status_id);
+                 
 
                     cn.Open();
 

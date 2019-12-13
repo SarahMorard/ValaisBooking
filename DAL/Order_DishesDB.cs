@@ -39,11 +39,7 @@ namespace DAL
                             Order_Dishes order_Dishes = new Order_Dishes();
 
                             order_Dishes.idOrder_Dishes = (int)dr["idOrder_Dishes"];
-                            order_Dishes.quantity = (int)dr["quantity"];
-                            order_Dishes.orders_id = (int)dr["orders_id"];
-                            order_Dishes.customers_id = (int)dr["customers_id"];
-                            order_Dishes.dishes_id = (int)dr["dishes_id"];
-                            order_Dishes.login_id = (int)dr["login_id"];
+                       
 
 
 
@@ -83,10 +79,7 @@ namespace DAL
                         {
                             order_Dishes = new Order_Dishes();
                             order_Dishes.idOrder_Dishes = (int)dr["idOrder_Dishes"];
-                            order_Dishes.quantity = (int)dr["quantity"];
-                            order_Dishes.orders_id = (int)dr["orders_id"];
-                            order_Dishes.customers_id = (int)dr["customers_id"];
-                            order_Dishes.dishes_id = (int)dr["dishes_id"];                         
+                                                  
                         }
                     }
 
@@ -106,14 +99,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Order_Dishes(quantity, orders_id, customers_id, dishes_id) values(@quantity, @orders_id, @customers_id, @dishes_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Order_Dishes(orders_id, dishes_id) values(@orders_id, @dishes_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@quantity", order_Dishes.quantity);
-                    cmd.Parameters.AddWithValue("@orders_id", order_Dishes.orders_id);
-                    cmd.Parameters.AddWithValue("@customers_id", order_Dishes.customers_id);
-                    cmd.Parameters.AddWithValue("@dishes_id", order_Dishes.dishes_id);
+                 
 
                     cn.Open();
 
@@ -140,15 +130,12 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Order_Dishes SET quantity = @quantity, orders_id = @orders_id, customers_id=@customers_id, dishes_id=@dishes_id WHERE idOrder_Dishes=@id";
+                    string query = "UPDATE Order_Dishes SET orders_id = @orders_id, dishes_id=@dishes_id WHERE idOrder_Dishes=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", order_Dishes.idOrder_Dishes);
-                    cmd.Parameters.AddWithValue("@quantity", order_Dishes.quantity);
-                    cmd.Parameters.AddWithValue("@orders_id", order_Dishes.orders_id);
-                    cmd.Parameters.AddWithValue("@customers_id", order_Dishes.customers_id);
-                    cmd.Parameters.AddWithValue("@dishes_id", order_Dishes.dishes_id);
+                  
                     
                     cn.Open();
 

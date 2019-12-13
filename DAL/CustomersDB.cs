@@ -132,7 +132,9 @@ namespace DAL
 
             return customers;
         }
-        public int UpdateCustomer(int id, Customers customers)
+
+        //update cusotmer according to the login created
+        public int UpdateCustomer(int idFK, Customers customers)
         {
             int resultat = 0;
 
@@ -143,18 +145,12 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Customers SET firstName = @firstName, lastName = @lastName, address=@address, phone_number=@phone_number, email=@email, city_id=@city_id, login_id=@login_id  WHERE idCustomers=@id";
+                    string query = "UPDATE Customers SET login_id = @idFK WHERE idCustomers=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", customers.idCustomers);
-                    cmd.Parameters.AddWithValue("@firstName", customers.firstName);
-                    cmd.Parameters.AddWithValue("@lastName", customers.lastName);
-                    cmd.Parameters.AddWithValue("@address", customers.address);
-                    cmd.Parameters.AddWithValue("@phone_number", customers.phone_number);
-                    cmd.Parameters.AddWithValue("@email", customers.email);
-                    cmd.Parameters.AddWithValue("@city_id", customers.city_id);
-                    cmd.Parameters.AddWithValue("@login_id", customers.login_id);
+                    cmd.Parameters.AddWithValue("@idFK", customers.login_id);
                     cn.Open();
 
                     resultat = cmd.ExecuteNonQuery();
@@ -167,6 +163,7 @@ namespace DAL
 
             return resultat;
         }
+
         public int DeleteCustomer(int id)
         {
             int resultat = 0;
@@ -196,5 +193,35 @@ namespace DAL
 
             return resultat;
         }
+
+        //Get the last index of the table login
+        public int GetLastIndex()
+        {
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            int resultat = 0;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                    string query = "SELECT MAX(idCustomers) FROM Customers";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+
+                    cn.Open();
+
+                    resultat = Convert.ToInt32(cmd.ExecuteScalar()); // scalra when we want to get 1 parameter
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return resultat;
+        }
+
     }
 }

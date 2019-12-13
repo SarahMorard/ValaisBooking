@@ -12,15 +12,14 @@ using DTO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ValaisEatWebApplication.Controllers
+namespace ValaisEatWebApplication.Models
 {
-    public class Order_dishesController : Controller
+    public class OrderDishesMVC
     {
-        private IConfiguration Configuration { get; }
-        public Order_dishesController(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }      
-       
+        public string loginName { get; set; }
+        public string loginAddress { get; set; }
+        public string orderPrice { get; set; }
+        public string status { get; set; }
+
     }
 }

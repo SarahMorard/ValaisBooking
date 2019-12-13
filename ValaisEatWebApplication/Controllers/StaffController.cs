@@ -47,35 +47,6 @@ namespace ValaisEatWebApplication.Controllers
             return View();
         }
 
-
-        //create a login
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(DTO.Staff staff, DTO.Login login)
-        {
-
-            IStaffManager staffManager = new StaffManager(Configuration);
-
-            var loginManager = new LoginManager(Configuration);
-
-
-            try
-            {
-                staffManager.AddStaff(staff);
-                login.login = staff.email;
-                login.password = null;
-                var newLogin = loginManager.AddLogin(login);
-                return RedirectToAction(nameof(Confirmation));
-            }
-            catch
-            {
-                return RedirectToAction(nameof(Create));
-
-            }
-
-
-        }
-
         //Page of confirmation when the staff has usccessfully created their account
         public ActionResult Confirmation()
         {
@@ -86,37 +57,6 @@ namespace ValaisEatWebApplication.Controllers
         public ActionResult Archieve()
         {
             return View();
-        }
-
-        
-
-        //get the list of order assigned to the staff
-        [HttpGet]
-        public ActionResult ListOrderCustomer()
-        {
-            //get the session for staff
-            if (HttpContext.Session.GetString("staffname") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            int idUSer = (int)HttpContext.Session.GetInt32("staffname");
-
-            var orderDishesManager = new Order_DishesManager(Configuration);
-
-            var listOrderDishes = orderDishesManager.GetOrder_Dishes();
-            var listOd = new List<Order_Dishes>();
-
-            foreach (Order_Dishes od in listOrderDishes)
-            {
-                if(od.login_id == idUSer)
-                {
-                    listOd.Add(od);
-                }
-            }
-
-          
-            return View(listOd);
-        }
+        }    
     }
 }

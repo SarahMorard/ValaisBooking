@@ -12,13 +12,13 @@
                 <form asp-action="Index">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="login" class="control-label"></label>
-                        <input asp-for="login" class="form-control" type="email" placeholder="email" />
+                        <label asp-for="login" class="control-label "></label>
+                        <input asp-for="login" class="form-control glyphicon glyphicon-user" type="email" placeholder="email" />
                         <span asp-validation-for="login" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="password" class="control-label"></label>
-                        <input asp-for="password" class="form-control" type="password" placeholder="Password" />
+                        <input asp-for="password" class="form-control glyphicon glyphicon-bell" type="password" placeholder="Password" />
                         <span asp-validation-for="password" class="text-danger"></span>
                     </div>
                     <div class="form-group">

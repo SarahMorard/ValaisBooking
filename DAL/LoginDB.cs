@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -42,6 +41,12 @@ namespace DAL
                             login.idLogin = (int)dr["idLogin"];
                             login.login = (string)dr["login"];
                             login.password = (string)dr["password"];
+                            login.firstName = (string)dr["firstName"];
+                            login.lastName = (string)dr["lastName"];
+                            login.address = (string)dr["address"];
+                            login.phone = (int)dr["phone"];
+                            login.email = (string)dr["email"];
+                            login.city_id = (int)dr["city_id"];
 
                             results.Add(login);
 
@@ -81,6 +86,12 @@ namespace DAL
                             login.idLogin = (int)dr["idLogin"];
                             login.login = (string)dr["login"];
                             login.password = (string)dr["password"];
+                            login.firstName = (string)dr["firstName"];
+                            login.lastName = (string)dr["lastName"];
+                            login.address = (string)dr["address"];
+                            login.phone = (int)dr["phone"];
+                            login.email = (string)dr["email"];
+                            login.city_id = (int)dr["city_id"];
 
                         }
                     }
@@ -101,18 +112,26 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Login(login, password, type) values(@login, @password, @type); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Login(login, password, type, firstName, lastName, address, phone, email, city_id) values(@login, @password, @type, @firstName, @lastName, @address, @phone, @email, @city_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
+                  
+
                     cmd.Parameters.AddWithValue("@login", login.login);
                     cmd.Parameters.AddWithValue("@password", login.password);
-                    cmd.Parameters.AddWithValue("@type", login.type="customer");
+                    cmd.Parameters.AddWithValue("@type", login.type);
+                    cmd.Parameters.AddWithValue("@firstName", login.firstName);
+                    cmd.Parameters.AddWithValue("@lastName", login.lastName);
+                    cmd.Parameters.AddWithValue("@address", login.address);
+                    cmd.Parameters.AddWithValue("@phone", login.phone);
+                    cmd.Parameters.AddWithValue("@email", login.email);
+                    cmd.Parameters.AddWithValue("@city_id", login.city_id);
+                 
 
                     cn.Open();
 
                     login.idLogin = Convert.ToInt32(cmd.ExecuteScalar());
-
 
                 }
             }
@@ -134,13 +153,21 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Login SET login = @login, password = @password WHERE idLogin=@id";
+                    string query = "UPDATE Login SET login = @login, password = @password, firstName = @firstName, lastName = @lastName, address = @address, phone = @phone, email = @email, city_id = @city_id WHERE idLogin=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", login.idLogin);
                     cmd.Parameters.AddWithValue("@login", login.login);
-                    cmd.Parameters.AddWithValue("@price", login.password);
+                    cmd.Parameters.AddWithValue("@firstName", login.firstName);
+                    cmd.Parameters.AddWithValue("@lastName", login.lastName);
+                    cmd.Parameters.AddWithValue("@address", login.address);
+                    cmd.Parameters.AddWithValue("@phone", login.phone);
+                    cmd.Parameters.AddWithValue("@email", login.email);
+                    cmd.Parameters.AddWithValue("@city_id", login.city_id);
+
+
+
 
                     cn.Open();
 
@@ -221,8 +248,38 @@ namespace DAL
             }
             return result;
         }
+
+        //Get the last index of the table login
+        public int GetLastIndex()
+        {
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            int resultat = 0;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+
+                    string query = "SELECT MAX(idLogin) FROM Login";
+
+
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                  
+
+                    cn.Open();
+
+                    resultat = Convert.ToInt32(cmd.ExecuteScalar()); // scalra when we want to get 1 t
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return resultat;
+        }
     }
 }
+
 
  
 

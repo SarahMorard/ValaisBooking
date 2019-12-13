@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data.SqlClient;
 using DTO;
 
 namespace DAL
@@ -13,6 +15,6 @@ namespace DAL
         Login AddLogin(Login login);
         int UpdateLogin(Login login);
         int DeleteLogin(int id);
-
+        int GetLastIndex();
     }
 }

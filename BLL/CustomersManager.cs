@@ -43,5 +43,10 @@ namespace BLL
             return CustomersDB.DeleteCustomer(IdCustomer);
         }
 
+        public int GetLastIndex()
+        {
+            return CustomersDB.GetLastIndex();
+        }
+
     }
 }

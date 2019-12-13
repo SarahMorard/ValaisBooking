@@ -13,5 +13,6 @@ namespace DAL
         Customers AddCustomer(Customers customers);
         int UpdateCustomer(int id, Customers customers);
         int DeleteCustomer(int id);
+        int GetLastIndex();
     }
 }

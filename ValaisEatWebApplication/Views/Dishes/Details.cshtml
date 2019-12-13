@@ -3,40 +3,41 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="container">
+    <h2>Details</h2>
 
-<h2>Details</h2>
-
-<div>
-    <h4>Dishes</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.idDishes)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.idDishes)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.type)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.type)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.price).-
-        </dd>
-    </dl>
-</div>
-<div>
-    <button type="button" class="btn btn-success">@Html.ActionLink("Edit", "Edit", new {id = Model.idDishes})</button>
-    <button type="button" class="btn btn-info"><a asp-action="ListAllDishes">Back to List</a></button>
+    <div>
+        <h4>Dishes</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.idDishes)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.idDishes)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.type)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.type)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.price).-
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <button type="button" class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = Model.idDishes })</button>
+        <button type="button" class="btn btn-info"><a asp-action="ListAllDishes">Back to List</a></button>
+    </div>
 </div>

@@ -14,5 +14,6 @@ namespace BLL
         Customers AddCustomer(Customers customer);
         int UpdateCustomer(int id, Customers customer);
         int DeleteCustomer(int IdCustomer);
+        int GetLastIndex();
     }
 }
