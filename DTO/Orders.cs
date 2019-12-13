@@ -7,7 +7,6 @@ namespace DTO
     public class Orders
     {
         public int idOrders { get; set; }
-        public string status { get; set; }
         public DateTime time { get; set; }
         public int quantity { get; set; }
         public int dishes_id { get; set; }

@@ -14,12 +14,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ValaisEatWebApplication.Models
 {
-    public class OrderDishesMVC
+    public class ListOrderDishesStaff
     {
-        public string loginName { get; set; }
-        public string loginAddress { get; set; }
-        public string orderPrice { get; set; }
-        public string status { get; set; }
+        public Login login { get; set; }
 
+        public List<ListOrderDishesStaff> listOdStaff { get; set; }
     }
 }
