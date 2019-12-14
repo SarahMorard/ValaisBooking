@@ -12,5 +12,6 @@ namespace DAL
         Order_Dishes AddOrder_Dishes(Order_Dishes order_Dishes);
         int UpdateOrder_Dishes(Order_Dishes order_Dishes);
         int DeleteOrder_Dishes(int id);
+        List<Order_Dishes> GetOD(int id);
     }
 }

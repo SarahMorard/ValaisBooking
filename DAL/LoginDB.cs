@@ -41,6 +41,7 @@ namespace DAL
                             login.idLogin = (int)dr["idLogin"];
                             login.login = (string)dr["login"];
                             login.password = (string)dr["password"];
+                            login.type = (string)dr["type"];
                             login.firstName = (string)dr["firstName"];
                             login.lastName = (string)dr["lastName"];
                             login.address = (string)dr["address"];
@@ -112,7 +113,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Login(login, password, type, firstName, lastName, address, phone, email, city_id) values(@login, @password, @type, @firstName, @lastName, @address, @phone, @email, @city_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into [Login](login, password, type, firstName, lastName, address, phone, email, city_id) values(@login, @password, @type, @firstName, @lastName, @address, @phone, @email, @city_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 

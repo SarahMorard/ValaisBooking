@@ -21,28 +21,51 @@ namespace ValaisEatWebApplication.Controllers
             Configuration = configuration;
         }
 
-        
-        //list the order assigned to the staff who is loged
-         public ActionResult listDishesPerStaff()
+        //Display the order dishes according to the staff their belong to 
+        public ActionResult DisplayOrderDishes()
         {
+            //get the session for staff
             if (HttpContext.Session.GetString("staffname") == null)
             {
                 return RedirectToAction("Index", "Login");
             }
 
-            int idCurrentStaff = (int)HttpContext.Session.GetInt32("id");
+            //managers for the actions of each table required to make the OrderDishesStaffMVC
+            var ODManager = new Order_DishesManager(Configuration);
+            var OManager = new OrdersManager(Configuration);
+            var LManager = new LoginManager(Configuration);
+            var DMananger = new DishesManager(Configuration);
 
-            //manager
-            var orderDishesManager = new Order_DishesManager(Configuration);
-            var loginManager = new LoginManager(Configuration);
+            //get the id of the current user and save it inside a variable
+            int CurrentStaff = (int)HttpContext.Session.GetInt32("id");
 
             //lists
-            var listOrders = orderDishesManager.GetOrder_Dishes();
-            var listLogins = loginManager.GetLogins(); 
+            //put the order_dishes indise a list for the current user staff
+            var ListOD = ODManager.GetOD(CurrentStaff);
+            var List
 
-            foreach (Order)
+           
+
+            
+            
+            //status of Order_Dishes
+
+
+
+
+            return View(ListOD);
+        }
+
+        
+
+
+        //update status
+        public ActionResult UpdateStatus()
+        {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
             {
-
+                return RedirectToAction("Index", "Login");
             }
 
             return View();

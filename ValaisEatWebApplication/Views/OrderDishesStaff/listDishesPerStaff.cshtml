@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ValaisEatWebApplication.Models.OrderDishesStaff>
+
+@{
+    ViewData["Title"] = "listDishesPerStaff";
+    IEnumerable<DTO.Login> customers = ViewData["Customer"] as IEnumerable<DTO.Login>;
+    IEnumerable<DTO.Orders> orders = ViewData["Order"] as IEnumerable<DTO.Orders>;
+}
+<div class="container">
+    <h2>listDishesPerStaff</h2>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerModel.firstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerModel.lastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerModel.address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerModel.phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OdModel.status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderModel.total)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            
+            <tr>        
+                <td>               
+                    @foreach (var login in customers)
+                    {
+                        if (item.OrderModel.login_id == login.idLogin)
+                        {
+                            item.CustomerModel.firstName = login.firstName;
+                        }
+                    }
+                    
+                    @item.CustomerModel.firstName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerModel.lastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerModel.address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerModel.phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OdModel.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderModel.total).-
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -8,7 +8,7 @@ using DTO;
 
 namespace DAL
 {
-    public class OrdersDB:IOrderDB
+    public class OrdersDB : IOrderDB
     {
         public IConfiguration Configuration { get; }
         public OrdersDB(IConfiguration configuration)
@@ -179,6 +179,50 @@ namespace DAL
             return resultat;
         }
 
+        //get the order according to the foreign key
+        public List<Orders> GetD()
+        {
+            List<Orders> results = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * FROM Orders o, Login l, Dishes d WHERE o.login_id = l.idLogin AND o.dishes_id = d.idDishes";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Orders>();
+
+                            Orders order = new Orders();
+
+                            order.idOrders = (int)dr["idDishes"];
+                            order.time = (DateTime)dr["time"];
+                            order.quantity = (int)dr["quantity"];
+                            order.total = (double)dr["total"];
+                            order.dishes_id = (int)dr["dishes_id"];
+                            order.login_id = (int)dr["login_id"];
+
+                            results.Add(order);
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return results;
+
+        }
     }
 }

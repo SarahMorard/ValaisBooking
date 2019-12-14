@@ -36,18 +36,18 @@ namespace ValaisEatWebApplication.Controllers
 
             IDishesManager dishesManager = new DishesManager(Configuration);
 
-                var dish = dishesManager.GetDishes();
-                var dishList = new List<Dishes>();
+            var dish = dishesManager.GetDishes();
+            var dishList = new List<Dishes>();
 
-                foreach (Dishes dishes in dish)
+            foreach (Dishes dishes in dish)
+            {
+                if (dishes.type == "Italian")
                 {
-                    if (dishes.type == "Italian")
-                    {
-                        dishList.Add(dishes); 
-                    }
+                    dishList.Add(dishes); 
                 }
+            }
 
-                return View(dishList);     
+            return View(dishList);     
         }
 
         //Get the Japanese dishes from the bdd front office according to their type
@@ -149,7 +149,7 @@ namespace ValaisEatWebApplication.Controllers
             {
                 if (dishes.type == "Korean")
                 {
-                    dishList.Add(dishes); //Filling the new dishes list
+                    dishList.Add(dishes); 
                 }
             }
             return View(dishList);

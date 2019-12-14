@@ -16,8 +16,18 @@ namespace ValaisEatWebApplication.Models
 {
     public class OrderDishesStaff
     {
-        public Login customer { get; set; }
-        public Order_Dishes od { get; set; }
 
+        public Login CustomerModel { get; set; }
+        public Dishes DishesModel { get; set; }
+        public Orders OrderModel { get; set; }
+        public Order_Dishes OdModel { get; set; }
+
+        public OrderDishesStaff()
+        {
+            this.CustomerModel  = new Login();
+            this.OrderModel     = new Orders();
+            this.OdModel        = new Order_Dishes();
+            this.DishesModel    = new Dishes();
+        }
     }
 }

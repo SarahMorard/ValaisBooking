@@ -47,7 +47,13 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-      
+
+        public List<Order_Dishes> GetOD(int id)
+        {
+            return Order_DishesDB.GetOD(id);
+        }
+
+
 
     }
 }
