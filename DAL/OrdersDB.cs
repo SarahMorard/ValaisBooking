@@ -8,7 +8,7 @@ using DTO;
 
 namespace DAL
 {
-    public class OrdersDB:IOrderDB
+    public class OrdersDB : IOrderDB
     {
         public IConfiguration Configuration { get; }
         public OrdersDB(IConfiguration configuration)
@@ -39,7 +39,7 @@ namespace DAL
                             Orders orders = new Orders();
 
                             orders.idOrders = (int)dr["idOrders"];
-                            orders.Status_id = (int)dr["Status_id"];
+                         
                           
                             results.Add(orders);
 
@@ -78,7 +78,7 @@ namespace DAL
                         {
                             orders = new Orders();
                             orders.idOrders = (int)dr["idOrders"];
-                            orders.Status_id = (int)dr["Status_id"];
+                           
                             
                         }
                     }
@@ -103,7 +103,7 @@ namespace DAL
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@Status_id", orders.Status_id);
+                   
                    
                     cn.Open();
 
@@ -135,7 +135,7 @@ namespace DAL
 
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", orders.idOrders);
-                    cmd.Parameters.AddWithValue("@Status_id", orders.Status_id);
+                 
 
                     cn.Open();
 
@@ -179,6 +179,48 @@ namespace DAL
             return resultat;
         }
 
+    
+        //get the order according to the foreigh key put in parameter
+        public Orders GetOrderByFK(int fk)
+        {
+            Orders orders = null;
 
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Orders where idOrders = @fk";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@fk", fk);
+
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            orders = new Orders();
+                            orders.idOrders = (int)dr["idOrders"];
+                            orders.time = (DateTime)dr["time"];
+                            orders.quantity = (int)dr["quantity"];
+                            orders.total = (double)dr["total"];
+                            orders.dishes_id = (int)dr["dishes_id"];
+                            orders.login_id = (int)dr["login_id"];
+
+
+                        }
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return orders;
+
+        }
     }
 }

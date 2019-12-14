@@ -36,18 +36,18 @@ namespace ValaisEatWebApplication.Controllers
 
             IDishesManager dishesManager = new DishesManager(Configuration);
 
-                var dish = dishesManager.GetDishes();
-                var dishList = new List<Dishes>();
+            var dish = dishesManager.GetDishes();
+            var dishList = new List<Dishes>();
 
-                foreach (Dishes dishes in dish)
+            foreach (Dishes dishes in dish)
+            {
+                if (dishes.type == "Italian")
                 {
-                    if (dishes.type == "Italian")
-                    {
-                        dishList.Add(dishes); 
-                    }
+                    dishList.Add(dishes); 
                 }
+            }
 
-                return View(dishList);     
+            return View(dishList);     
         }
 
         //Get the Japanese dishes from the bdd front office according to their type
@@ -149,7 +149,7 @@ namespace ValaisEatWebApplication.Controllers
             {
                 if (dishes.type == "Korean")
                 {
-                    dishList.Add(dishes); //Filling the new dishes list
+                    dishList.Add(dishes); 
                 }
             }
             return View(dishList);
@@ -201,6 +201,11 @@ namespace ValaisEatWebApplication.Controllers
         // Edit the selected dish
         public ActionResult Edit(int id)
         {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishId(id);
@@ -212,6 +217,12 @@ namespace ValaisEatWebApplication.Controllers
         [HttpPost]
         public ActionResult Edit(DTO.Dishes d)
         {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IDishesManager dishesManager = new DishesManager(Configuration);
             dishesManager.UpdateDish(d);
 
@@ -222,6 +233,12 @@ namespace ValaisEatWebApplication.Controllers
         // Details for one dish
         public ActionResult Details(int id)
         {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishId(id);
 
@@ -232,6 +249,11 @@ namespace ValaisEatWebApplication.Controllers
         // Display template to create a new dish
         public ActionResult Create()
         {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             return View();
         }
@@ -241,6 +263,11 @@ namespace ValaisEatWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(DTO.Dishes dish)
         {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             IDishesManager dishesManager = new DishesManager(Configuration);
             dishesManager.AddDish(dish);
@@ -253,6 +280,12 @@ namespace ValaisEatWebApplication.Controllers
         // delete dish
         public ActionResult Delete(int id)
         {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             IDishesManager dishesManager = new DishesManager(Configuration);
             var dish = dishesManager.GetDishId(id);
 
@@ -264,6 +297,12 @@ namespace ValaisEatWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
             try
             {
                 IDishesManager dishesManager = new DishesManager(Configuration);

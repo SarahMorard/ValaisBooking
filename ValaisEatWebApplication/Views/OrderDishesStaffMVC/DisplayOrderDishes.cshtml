@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ValaisEatWebApplication.Models.OrderDishesStaffMVC>
+
+@{
+    ViewData["Title"] = "DisplayOrderDishes";
+}
+
+<div class="container">
+    <h2>DisplayOrderDishes</h2>
+
+    <p>
+
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastNameCustomer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FistNameCustomer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AddressDelivery)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TimeDelivery)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneCustomer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusDelivery)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalOrder)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastNameCustomer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FistNameCustomer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddressDelivery)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeDelivery)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneCustomer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatusDelivery)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalOrder)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Archieve", "Archieve", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("SetTatus", "SetTatus", new { /* id=item.PrimaryKey */ }) |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

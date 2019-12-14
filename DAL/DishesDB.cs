@@ -42,7 +42,7 @@ namespace DAL
                             dishes.name = (string)dr["name"];
                             dishes.type = (string)dr["type"];
                             dishes.price = (double)dr["price"];
-                            dishes.restaurant_id = (int)dr["restaurant_id"];
+                            //dishes.restaurant_id = (int)dr["restaurant_id"];
 
                             results.Add(dishes);
 
@@ -233,10 +233,5 @@ namespace DAL
 
         }
 
-
     }
-
-
-
-
 }

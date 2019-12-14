@@ -14,5 +14,6 @@ namespace BLL
         Order_Dishes AddOrder_Dishes(Order_Dishes order_dishes);
         int UpdateOrder_Dishes(Order_Dishes order_dishes);
         int DeleteOrder_Dishes(int IdOrder_Dishes);
+        List<Order_Dishes> GetOD(int id);
     }
 }

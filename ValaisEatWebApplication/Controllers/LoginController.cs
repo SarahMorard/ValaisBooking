@@ -10,9 +10,8 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using DTO;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Authorization;
 
-namespace WebApplication2.Controllers
+namespace ValaisEatWebApplication.Controllers
 {
     public class LoginController : Controller
     {
@@ -22,18 +21,6 @@ namespace WebApplication2.Controllers
             Configuration = configuration;
         }
 
-
-        //if the login customer was successful, redirection to page Success
-        public IActionResult Success()
-        {
-            return View();
-        }
-
-        //if the login staff was successful, redirection to page Success
-        public IActionResult SuccessStaff()
-        {
-            return View();
-        }
 
         //Connection page
         [HttpGet]
@@ -47,29 +34,29 @@ namespace WebApplication2.Controllers
         public IActionResult Index(Login l)
         {
             var loginManager = new LoginManager(Configuration);
-            Login login = loginManager.IsUserValid(l.login, l.password) ;         
+            Login login = loginManager.IsUserValid(l.login, l.password); //verify if the login is valid then return the valid login
 
             if (login != null)
             {
-               
-                if (login.type.Equals("customer"))
+                //log to customer account according to the value "customer"
+                if (login.type.Equals("customer")) //verify if the type match the value "customer"
                 {
                     HttpContext.Session.SetString("username", login.login);
-                    HttpContext.Session.SetInt32("username", login.idLogin);
-                    return RedirectToAction(nameof(Success));
+                    HttpContext.Session.SetInt32("id", login.idLogin); //set login of the customer for this session
+                    return RedirectToAction(nameof(Success)); //redirection to a page that tell the customer that he has been logged
                 }
                 else
                 {
-                    HttpContext.Session.SetString("staffname", login.login);
-                    HttpContext.Session.SetInt32("staffname", login.idLogin);
-                    return RedirectToAction(nameof(SuccessStaff));
+                    HttpContext.Session.SetString("staffname", login.login); 
+                    HttpContext.Session.SetInt32("id", login.idLogin); //set login of the staff for this session
+                    return RedirectToAction(nameof(SuccessStaff)); //redirection to a page that tell the staff that he has been logged
                 }
             }
             else
             {
                 return View();
             }
-            
+
         }
 
         //Decconnection from the session
@@ -83,35 +70,31 @@ namespace WebApplication2.Controllers
         // List cities for the customers
         public ActionResult Create()
         {
+            var ctiyManager = new CitiesManager(Configuration);
+            var city = ctiyManager.GetCities();
 
+            var cities = new List<SelectListItem>();
+
+            foreach (Cities c in city)
+            {
+                cities.Add(new SelectListItem { Value = c.idCities.ToString(), Text = c.name }); //add the cities to a SelectListItem
+            }
+
+            ViewBag.Cities = cities;
             return View();
         }
 
 
-        //create a new login
+        //create a new customer
         [HttpPost]
-        public ActionResult Create(DTO.Login login)
+        public ActionResult Create(Login login)
         {
             var loginManager = new LoginManager(Configuration);
-            var customerManager = new CustomersManager(Configuration);
 
-            //add the login foreign key logn to the customer table
-            int idFK = 0;
-
-            var listLogin = loginManager.GetLogin();
-
-            foreach (Login l in listLogin)
-            {
-                if (l.idLogin > idFK)
-                {
-                    idFK = login.idLogin;
-                }
-            }
             try
             {
                 loginManager.AddLogin(login);
-                //customerManager.UpdateCustomer();
-                return RedirectToAction("Confirmation", "Customers");
+                return RedirectToAction("Login", "Create");
             }
             catch
             {
@@ -121,5 +104,24 @@ namespace WebApplication2.Controllers
 
 
         }
+
+
+        //if the account was successfully created, the customer will be redirected to this page
+        public ActionResult Confirmation()
+        {
+            return View();
+        }
+
+        //if the login customer was successful, redirection to page Success
+        public IActionResult Success()
+        {
+            return View();
+        }
+
+        //if the login staff was successful, redirection to page Success
+        public IActionResult SuccessStaff()
+        {
+            return View();
+        }
     }
-  }
+}

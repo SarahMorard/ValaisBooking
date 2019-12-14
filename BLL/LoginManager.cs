@@ -55,5 +55,10 @@ namespace BLL
              
             return LoginDB.IsUserValid(login, password);
         }
+
+        public Login GetLoginByFK(int fk)
+        {
+            return LoginDB.GetLoginByFK(fk);
+        }
     }
 }

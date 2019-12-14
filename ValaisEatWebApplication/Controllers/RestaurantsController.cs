@@ -20,6 +20,7 @@ namespace ValaisEatWebApplication.Controllers
             Configuration = configuration;
         }
 
+        //list the restaurants available
         [HttpGet]
         public ActionResult ListRetaurants()
         {
@@ -35,10 +36,10 @@ namespace ValaisEatWebApplication.Controllers
             return View(listResto);
         }
 
-
+        //list the dishes according to the restaurant they belong to
         public ActionResult ListAllDishesPerResto(int id)
         {
-            //get the session for staff
+            //get the session for customer
             if (HttpContext.Session.GetString("username") == null)
             {
                 return RedirectToAction("Index", "Login");
