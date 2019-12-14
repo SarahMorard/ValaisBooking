@@ -12,6 +12,6 @@ namespace DAL
         Orders AddOrders(Orders orders);
         int UpdateOrders(Orders orders);
         int DeleteOrders(int id);
-        List<Orders> GetD();
+        Orders GetOrderByFK(int fk);
     }
 }

@@ -41,9 +41,9 @@ namespace BLL
             return OrdersDB.DeleteOrders(IdOrder);
         }
 
-        public List<Orders> GetD()
+        public Orders GetOrderByFK(int fk)
         {
-            return OrdersDB.GetD();
+            return OrdersDB.GetOrderByFK(fk);
         }
     }
 }

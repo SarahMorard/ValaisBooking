@@ -179,49 +179,47 @@ namespace DAL
             return resultat;
         }
 
-        //get the order according to the foreign key
-        public List<Orders> GetD()
+    
+        //get the order according to the foreigh key put in parameter
+        public Orders GetOrderByFK(int fk)
         {
-            List<Orders> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            Orders orders = null;
 
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * FROM Orders o, Login l, Dishes d WHERE o.login_id = l.idLogin AND o.dishes_id = d.idDishes";
+                    string query = "Select * from Orders where idOrders = @fk";
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@fk", fk);
+
 
                     cn.Open();
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        while (dr.Read())
+                        if (dr.Read())
                         {
-                            if (results == null)
-                                results = new List<Orders>();
+                            orders = new Orders();
+                            orders.idOrders = (int)dr["idOrders"];
+                            orders.time = (DateTime)dr["time"];
+                            orders.quantity = (int)dr["quantity"];
+                            orders.total = (double)dr["total"];
+                            orders.dishes_id = (int)dr["dishes_id"];
+                            orders.login_id = (int)dr["login_id"];
 
-                            Orders order = new Orders();
-
-                            order.idOrders = (int)dr["idDishes"];
-                            order.time = (DateTime)dr["time"];
-                            order.quantity = (int)dr["quantity"];
-                            order.total = (double)dr["total"];
-                            order.dishes_id = (int)dr["dishes_id"];
-                            order.login_id = (int)dr["login_id"];
-
-                            results.Add(order);
 
                         }
                     }
+
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
-
-            return results;
+            return orders;
 
         }
     }

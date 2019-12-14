@@ -250,33 +250,50 @@ namespace DAL
             return result;
         }
 
-        //Get the last index of the table login
-        public int GetLastIndex()
+        //get the login according to the foreigh key put in parameter
+        public Login GetLoginByFK(int fk)
         {
+            Login login = null;
+
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            int resultat = 0;
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-
-                    string query = "SELECT MAX(idLogin) FROM Login";
-
-
+                    string query = "Select * from Login where idLogin = @fk";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                  
+                    cmd.Parameters.AddWithValue("@fk", fk);
+
 
                     cn.Open();
 
-                    resultat = Convert.ToInt32(cmd.ExecuteScalar()); // scalra when we want to get 1 t
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            login = new Login();
+                            login.idLogin = (int)dr["idLogin"];
+                            login.login = (string)dr["login"];
+                            login.password = (string)dr["password"];
+                            login.firstName = (string)dr["firstName"];
+                            login.lastName = (string)dr["lastName"];
+                            login.address = (string)dr["address"];
+                            login.phone = (int)dr["phone"];
+                            login.email = (string)dr["email"];
+                            login.city_id = (int)dr["city_id"];
+
+
+                        }
+                    }
+
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
+            return login;
 
-            return resultat;
         }
     }
 }

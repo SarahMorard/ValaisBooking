@@ -15,6 +15,6 @@ namespace DAL
         Login AddLogin(Login login);
         int UpdateLogin(Login login);
         int DeleteLogin(int id);
-        int GetLastIndex();
+        Login GetLoginByFK(int fk);
     }
 }

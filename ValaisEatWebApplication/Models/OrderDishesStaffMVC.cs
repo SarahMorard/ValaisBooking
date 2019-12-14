@@ -19,6 +19,7 @@ namespace ValaisEatWebApplication.Models
         public string LastNameCustomer { get; set; }
         public string FistNameCustomer { get; set; }
         public string AddressDelivery { get; set; }
+        public DateTime TimeDelivery { get; set; }
         public int PhoneCustomer { get; set; }
         public string StatusDelivery { get; set; }
         public double TotalOrder { get; set; }
@@ -28,6 +29,7 @@ namespace ValaisEatWebApplication.Models
             this.LastNameCustomer   = "";
             this.FistNameCustomer   = "";
             this.AddressDelivery    = "";
+            this.TimeDelivery       = DateTime.Now;
             this.PhoneCustomer      = 0;
             this.StatusDelivery     = "";
             this.TotalOrder         = 0;

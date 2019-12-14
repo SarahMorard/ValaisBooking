@@ -56,9 +56,9 @@ namespace BLL
             return LoginDB.IsUserValid(login, password);
         }
 
-        public int GetLastIndex()
+        public Login GetLoginByFK(int fk)
         {
-            return LoginDB.GetLastIndex();
+            return LoginDB.GetLoginByFK(fk);
         }
     }
 }

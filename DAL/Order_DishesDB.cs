@@ -223,9 +223,5 @@ namespace DAL
             return results;
 
         }
-
-
-        //get the order according to the foreign key
-
     }
 }

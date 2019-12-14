@@ -15,7 +15,7 @@ namespace BLL
         int UpdateLogin(Login login);
         int DeleteLogin(int IdLogin);
         Login IsUserValid(string login, string password);
-        int GetLastIndex();
+        Login GetLoginByFK(int fk);
 
     }
 }
