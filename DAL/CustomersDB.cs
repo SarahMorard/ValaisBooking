@@ -132,7 +132,7 @@ namespace DAL
 
             return customers;
         }
-        public int UpdateCustomer(Customers customers)
+        public int UpdateCustomer(int id, Customers customers)
         {
             int resultat = 0;
 
@@ -143,7 +143,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Customers SET firstName = @firstName, lastName = @lastName, address=@address, phone_number=@phone_number, email=@email WHERE idCustomers=@id";
+                    string query = "UPDATE Customers SET firstName = @firstName, lastName = @lastName, address=@address, phone_number=@phone_number, email=@email, city_id=@city_id, login_id=@login_id  WHERE idCustomers=@id";
 
 
                     SqlCommand cmd = new SqlCommand(query, cn);
@@ -153,6 +153,8 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@address", customers.address);
                     cmd.Parameters.AddWithValue("@phone_number", customers.phone_number);
                     cmd.Parameters.AddWithValue("@email", customers.email);
+                    cmd.Parameters.AddWithValue("@city_id", customers.city_id);
+                    cmd.Parameters.AddWithValue("@login_id", customers.login_id);
                     cn.Open();
 
                     resultat = cmd.ExecuteNonQuery();

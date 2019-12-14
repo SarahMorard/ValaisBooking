@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Threading.Tasks;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Mvc;
+@using ValaisEatWebApplication.Models;
+@using BLL;
+@using Microsoft.Extensions.Configuration;
+@using System.IO;
+@using DTO;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using Microsoft.AspNetCore.Authorization;
+
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -29,50 +45,97 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ValaisEat</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Details">Home</a></li>
-                    <li><a asp-area="" asp-controller="Dishes" asp-action="PostDish">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">Contact</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Customers" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
-                    <li><a asp-area="" asp-controller="Login" asp-action="Index"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
+
+
+                @*BASIC DISPLAY*@
+                @{ if (Context.Session.GetString("username") == null && Context.Session.GetString("staffname") == null)
+                    {
+                        <ul class="nav navbar-nav">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Details">Home</a></li>
+                            <li><a asp-area="" asp-controller="Dishes" asp-action="PostDish">About</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="About">Contact</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a asp-area="" asp-controller="Customers" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
+                            <li><a asp-area="" asp-controller="Login" asp-action="Index"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        </ul>
+                    }
+                }
+
+                @*CUSTOMER DISPLAY*@
+                @{ if (Context.Session.GetString("username") != null)
+                    {
+
+                        <ul class="nav navbar-nav">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Details">Home</a></li>
+                            <li><a asp-area="" asp-controller="Restaurants" asp-action="ListRetaurants">Our Restaurants</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="About">Contact</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a asp-area="" asp-controller="Order_dishes" asp-action="ListOrder"><span class="glyphicon glyphicon-briefcase"></span> My orders</a></li>
+                            <li><a asp-area="" asp-controller="Login" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        </ul>
+
+                    }
+                }
+
+                @*STAFF DISPLAY*@
+               
+                @{ if (Context.Session.GetString("staffname") != null)
+                    {
+
+
+                    <ul class="nav navbar-nav">
+
+                        <li><a asp-area="" asp-controller="Staff" asp-action="ListOrderCustomer">Orders of customers</a></li>
+                        <li><a asp-area="" asp-controller="Dishes" asp-action="ListAllDishes">Dishes Management</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a asp-area="" asp-controller="" asp-action=""><span class="glyphicon glyphicon-user"></span> AccountNameHere</a></li>
+                        <li><a asp-area="" asp-controller="Login" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+
+                        }
+                    }
             </div>
         </div>
+
     </nav>
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - ValaisEat</p>
-        </footer>
-    </div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+    @RenderBody()
+    <hr />
+   
+<footer>
+    <p>&copy; 2019 - ValaisEat</p>
+</footer>
+    
 
-    @RenderSection("Scripts", required: false)
+
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @RenderSection("Scripts", required: false)
 </body>
 </html>

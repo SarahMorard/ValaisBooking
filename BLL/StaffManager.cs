@@ -7,9 +7,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class StaffManager
+    public class StaffManager : IStaffManager
     {
         public IStaffDB StaffDB { get; }
+
+        IStaffManager IStaffManager.StaffDB => throw new NotImplementedException();
 
         public StaffManager(IConfiguration configuration)
         {

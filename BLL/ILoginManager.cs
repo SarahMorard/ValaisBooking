@@ -14,6 +14,7 @@ namespace BLL
         Login AddLogin(Login login);
         int UpdateLogin(Login login);
         int DeleteLogin(int IdLogin);
-        bool IsUserValid(Login l);
+        Login IsUserValid(string login, string password);
+
     }
 }

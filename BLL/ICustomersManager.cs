@@ -12,7 +12,7 @@ namespace BLL
         List<Customers> GetCustomers();
         Customers GetCustomerId(int id);
         Customers AddCustomer(Customers customer);
-        int UpdateCustomer(Customers customer);
+        int UpdateCustomer(int id, Customers customer);
         int DeleteCustomer(int IdCustomer);
     }
 }

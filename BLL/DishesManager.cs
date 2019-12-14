@@ -7,13 +7,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-   public class DishesManager : IDishesManager
+    public class DishesManager : IDishesManager
     {
-        public IDishesDB DishesDB{ get; }
+        public IDishesDB DishesDB { get; }
 
         public IDishesManager dishesDB => throw new NotImplementedException();
 
-        public DishesManager (IConfiguration configuration)
+        public DishesManager(IConfiguration configuration)
         {
             DishesDB = new DishesDB(configuration);
         }
@@ -41,6 +41,11 @@ namespace BLL
         public int DeleteDish(int IdDish)
         {
             return DishesDB.DeleteDish(IdDish);
+        }
+
+        public List<Dishes> GetListDishes(int id)
+        {
+            return DishesDB.GetListDishes(id);
         }
     }
 }

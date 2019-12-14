@@ -10,7 +10,7 @@ namespace BLL
     public class LoginManager : ILoginManager
     {
 
-        public ILoginDB LoginDB{ get; }
+        public ILoginDB LoginDB { get; }
 
         ILoginManager ILoginManager.LoginDB => throw new NotImplementedException();
 
@@ -26,7 +26,7 @@ namespace BLL
 
         public Login GetLoginId(int id)
         {
-           
+
             return LoginDB.GetLoginId(id);
         }
 
@@ -50,10 +50,10 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public bool IsUserValid(Login l)
+        public Login IsUserValid(string login, string password)
         {
-
-            return LoginDB.IsUserValid(l);
+             
+            return LoginDB.IsUserValid(login, password);
         }
     }
 }

@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using DTO;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
 namespace ValaisEatWebApplication.Controllers
 {
     public class RestaurantsController : Controller
@@ -21,97 +20,36 @@ namespace ValaisEatWebApplication.Controllers
             Configuration = configuration;
         }
 
-
-
-        // GET: Restaurants
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult ListRetaurants()
         {
-            return View();
-        }
-
-        // GET: Restaurants/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Restaurants/Create
-        public ActionResult Create(Restaurants r)
-        {
-            Restaurants restaurants = r;
-
-            return View(restaurants);
-        }
-
-        [HttpPost]
-        public ActionResult Post(Restaurants r)
-        {
-            Restaurants restaurants = r;
-
-            return View();
-        }
-
-        // POST: Restaurants/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            //get the session for customer
+            if (HttpContext.Session.GetString("username") == null)
             {
-                // TODO: Add insert logic here
+                return RedirectToAction("Index", "Login");
+            }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var restoManager = new RestaurantManager(Configuration);
+            var listResto = restoManager.GetRestaurants();
+
+            return View(listResto);
         }
 
-        // GET: Restaurants/Edit/5
-        public ActionResult Edit(int id)
+
+        public ActionResult ListAllDishesPerResto(int id)
         {
-            return View();
+            //get the session for staff
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            IDishesManager dishesManager = new DishesManager(Configuration);
+            var dish = dishesManager.GetListDishes(id);
+          
+
+            return View(dish);
         }
 
-        // POST: Restaurants/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Restaurants/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Restaurants/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

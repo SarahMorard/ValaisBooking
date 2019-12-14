@@ -10,11 +10,9 @@ namespace DTO
         public string name { get; set; }
         public string address { get; set; }
         public int city_id { get; set; }
-        public int dishes_id { get; set; }
-        public int order_dishes_id { get; set;}
         public override string ToString()
         {
-            return $"{idRestaurant}|{name}|{city_id}|{dishes_id}";
+            return $"{idRestaurant}|{name}|{city_id}";
         }
     }
 }

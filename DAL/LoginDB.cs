@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,13 +8,14 @@ using DTO;
 
 namespace DAL
 {
-    public class LoginDB:ILoginDB
+    public class LoginDB : ILoginDB
     {
         public IConfiguration Configuration { get; }
         public LoginDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
         public List<Login> GetLogins()
         {
             List<Login> results = null;
@@ -39,8 +41,8 @@ namespace DAL
 
                             login.idLogin = (int)dr["idLogin"];
                             login.login = (string)dr["login"];
-                            login.password = (string)dr["password"];                            
-                            
+                            login.password = (string)dr["password"];
+
                             results.Add(login);
 
                         }
@@ -79,7 +81,7 @@ namespace DAL
                             login.idLogin = (int)dr["idLogin"];
                             login.login = (string)dr["login"];
                             login.password = (string)dr["password"];
-                            
+
                         }
                     }
 
@@ -99,13 +101,14 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into Login(idLogin, login, password) values(@login, @password); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Login(login, password, type) values(@login, @password, @type); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@login", login.login);
                     cmd.Parameters.AddWithValue("@password", login.password);
-                   
+                    cmd.Parameters.AddWithValue("@type", login.type="customer");
+
                     cn.Open();
 
                     login.idLogin = Convert.ToInt32(cmd.ExecuteScalar());
@@ -138,7 +141,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@id", login.idLogin);
                     cmd.Parameters.AddWithValue("@login", login.login);
                     cmd.Parameters.AddWithValue("@price", login.password);
-                  
+
                     cn.Open();
 
                     resultat = cmd.ExecuteNonQuery();
@@ -181,10 +184,45 @@ namespace DAL
             return resultat;
         }
 
-        public bool IsUserValid(Login l)
-        {
-            // add sql statement to get user data from DB
-            return true;
+        //to check the user
+        public Login IsUserValid(string login, string password)
+        {   
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            Login result = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Login WHERE login=@login AND password=@password";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@login", login);
+                    cmd.Parameters.AddWithValue("@password", password);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            result = new Login();
+
+                            result.idLogin = (int)dr["idLogin"];
+                            result.login = (String)dr["login"];
+                            result.password = (String)dr["password"];
+                            result.type = (String)dr["type"];
+                        }
+                           
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return result;
         }
     }
 }
+
+ 
+

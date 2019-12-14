@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BLL;
 using DAL;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ValaisEatWebApplication
 {
@@ -32,10 +33,16 @@ namespace ValaisEatWebApplication
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            //j'ai ajouter ici les dépendences pour Order_dishies
-            services.AddSession();
-            services.AddScoped<IOrder_DishesManager, Order_DishesManager>();
-            services.AddScoped<IOrder_DishesDB, Order_DishesDB>();
+            services.AddSession(opts =>
+            {
+                opts.Cookie.IsEssential = true; // make the session cookie Essential
+            });
+
+            services.AddScoped<IDishesManager, DishesManager>();
+            services.AddScoped<IDishesDB, DishesDB>();
+            services.AddScoped<ILoginManager, LoginManager>();
+            services.AddScoped<ILoginDB, LoginDB>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -56,6 +63,7 @@ namespace ValaisEatWebApplication
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

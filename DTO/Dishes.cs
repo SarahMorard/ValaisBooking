@@ -10,7 +10,8 @@ namespace DTO
         public string type { get; set; }
         public string name { get; set; }
         public double price { get; set; }
-       
+        public int restaurant_id { get; set; }
+
         public override string ToString()
         
         {

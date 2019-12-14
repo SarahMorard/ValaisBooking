@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.price).-
             </td>
             <td>
-                <button type="button" class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id=item.idDishes})</button>
+                <button type="button" class="btn btn-success ">@Html.ActionLink("Edit", "Edit", new { id=item.idDishes})</button>
                 <button type="button" class="btn btn-warning">@Html.ActionLink("Details", "Details", new {id=item.idDishes})</button>
-                <button type="button" class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new {id=item.idDishes })</button>
+                <button type="button" class="btn btn-danger glyphicon glyphicon-alert"> @Html.ActionLink("Delete", "Delete", new {id=item.idDishes })</button>
             </td>
         </tr>
 }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-   public class Order_DishesManager:IOrder_DishesManager
+   public class Order_DishesManager: IOrder_DishesManager
     {
         public IOrder_DishesDB Order_DishesDB{ get; }
 
@@ -42,5 +42,12 @@ namespace BLL
         {
             return Order_DishesDB.DeleteOrder_Dishes(IdOrder_Dishes);
         }
+
+        public Order_Dishes AddOrder_Dishes(Login order_dishes)
+        {
+            throw new NotImplementedException();
+        }
+      
+
     }
 }
