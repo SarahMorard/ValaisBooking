@@ -119,6 +119,8 @@ namespace DAL
 
             return order_Dishes;
         }
+
+        // Update the selected order dishes 
         public int UpdateOrder_Dishes(Order_Dishes order_Dishes)
         {
             int resultat = 0;
@@ -130,13 +132,14 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Order_Dishes SET orders_id = @orders_id, dishes_id=@dishes_id WHERE idOrder_Dishes=@id";
-
-
+                    string query = "UPDATE Order_Dishes SET status = @status, order_id = @order_id, login_id=@login_id WHERE idOrder_Dishes = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", order_Dishes.idOrder_Dishes);
-                  
-                    
+                    cmd.Parameters.AddWithValue("@status", order_Dishes.status);
+                    cmd.Parameters.AddWithValue("@order_id", order_Dishes.order_id);
+                    cmd.Parameters.AddWithValue("@login_id", order_Dishes.login_id);
+
+
                     cn.Open();
 
                     resultat = cmd.ExecuteNonQuery();
@@ -222,6 +225,37 @@ namespace DAL
 
             return results;
 
+        }
+
+        public bool VerifOrderDishes(int id)
+        {
+            bool Verif = false;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select COUNT (*) FROM Order_Dishes WHERE DATEDIFF(minute, NOW(), time)<30 AND login_id=@id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    if (cmd.ExecuteNonQuery()>5)
+                    {
+                        Verif = false;
+                    }else
+                    {
+                        Verif = true;
+                    }
+                    cn.Open();
+                   
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return Verif;
         }
     }
 }

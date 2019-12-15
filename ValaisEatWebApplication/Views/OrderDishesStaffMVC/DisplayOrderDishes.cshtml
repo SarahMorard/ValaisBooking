@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ValaisEatWebApplication.Models.OrderDishesStaffMVC>
 
 @{
-    ViewData["Title"] = "DisplayOrderDishes";
+    ViewData["Title"] = "DisplayOrderDishes";   
 }
 
 <div class="container">
@@ -14,25 +14,25 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.LastNameCustomer)
+                    Lastname
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.FistNameCustomer)
+                    Firstname
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.AddressDelivery)
+                    Address
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TimeDelivery)
+                    Delivery Time
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PhoneCustomer)
+                    Phone number
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.StatusDelivery)
+                    Delivery Status
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TotalOrder)
+                    Total
                 </th>
                 <th></th>
             </tr>
@@ -60,14 +60,17 @@
                         @Html.DisplayFor(modelItem => item.StatusDelivery)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.TotalOrder)
+                        @Html.DisplayFor(modelItem => item.TotalOrder).-
                     </td>
-                    <td>
-                        @Html.ActionLink("Archieve", "Archieve", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("SetTatus", "SetTatus", new { /* id=item.PrimaryKey */ }) |
-                    </td>
+
                 </tr>
             }
+
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-info"><a asp-action="ListOD">Archive</a></button>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
