@@ -20,23 +20,39 @@ namespace ValaisEatWebApplication.Controllers
             Configuration = configuration;
         }
         //implémentation auto des id externe 
-        public IActionResult Index(int idDishes)
+        public IActionResult Index(int id)
         {
             //get the session for customer
             if (HttpContext.Session.GetString("username") == null)
             {
                 return RedirectToAction("Index", "Login");
             }
-
+            
             OrderViewModel orderVM = new OrderViewModel();
-            orderVM.idDishes = idDishes;
+            orderVM.idDishes = id;
+          
             orderVM.idLogin = (int)HttpContext.Session.GetInt32("id");
 
 
             return View(orderVM);
         }
+        public ActionResult Create(int id) {
+            //get the session for customer
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            DishesManager dm = new DishesManager(Configuration);
+            OrderViewModel orderVM = new OrderViewModel();
+            orderVM.idDishes = id;
+            orderVM.name = dm.GetDishId(id).name;
+            orderVM.price = dm.GetDishId(id).price;
+            orderVM.idLogin = (int)HttpContext.Session.GetInt32("id");
 
-        [HttpPost]
+
+            return View(orderVM);
+        }
+       [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(OrderViewModel orderVM)
         {

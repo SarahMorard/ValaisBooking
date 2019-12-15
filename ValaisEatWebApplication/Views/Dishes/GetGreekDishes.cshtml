@@ -40,7 +40,7 @@
             <td>
             </td>
             <td>
-                <a href="@Url.Action("RemoveAllItems", "", new{ id = item.idDishes })" class="btn btn-primary"> Ordering Now</a> 
+                <button type="button" class="btn btn-info">@Html.ActionLink("Order", "Create","Orders", new { id = item.idDishes })</button>
             </td>
             
         </tr>
