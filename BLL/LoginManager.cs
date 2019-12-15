@@ -35,6 +35,11 @@ namespace BLL
             return LoginDB.AddLogin(login);
         }
 
+        public static int GetLoginId(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         public int UpdateLogin(Login login)
         {
             return LoginDB.UpdateLogin(login);

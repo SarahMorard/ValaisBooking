@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BLL;
+using DTO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using ValaisEatWebApplication.Models;
+
+namespace ValaisEatWebApplication.Controllers
+{
+   
+    public class OrdersController : Controller
+    {
+        private IConfiguration Configuration { get; }
+        public OrdersController(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        //implémentation auto des id externe 
+        public IActionResult Index(int idDishes)
+        {
+
+            OrderViewModel orderVM = new OrderViewModel();
+            orderVM.idDishes = idDishes;
+            orderVM.idLogin = (int)HttpContext.Session.GetInt32("id");
+
+
+            return View(orderVM);
+        }
+        public ActionResult Create(OrderViewModel orderVM)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                IOrderManager oMan = new OrdersManager(Configuration);
+                //Implementation de mon Order
+                DTO.Orders O = new Orders();
+                O.dishes_id = orderVM.idDishes;
+                O.login_id = orderVM.idLogin;
+                O.time = orderVM.time;
+                O.quantity = orderVM.quantity;
+                O.total = orderVM.total;
+                //Mettre dans la base de donée 
+                oMan.AddOrders(O);
+                
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+}
