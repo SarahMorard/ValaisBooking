@@ -97,9 +97,9 @@ namespace ValaisEatWebApplication.Controllers
             }
 
             IOrder_DishesManager ODManager = new Order_DishesManager(Configuration);
-            var OD = ODManager.GetOrder_DishesId(id);       
+            var OD = ODManager.GetOrder_DishesId(id);       // Get the order dishes that was retrived from the list
 
-            return View(OD);
+            return View(OD);                                // Return the order dishes previously retrived
         }
 
         //post the new edited dish

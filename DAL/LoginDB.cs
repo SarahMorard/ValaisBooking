@@ -113,7 +113,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into [Login](login, password, type, firstname, lastname, address, phone, email, city_id) values(@login, @password, @type, @firstname, @lastname, @address, @phone, @email, @email, @city_id); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Login(login, password, type, firstname, lastname, address, phone, email, city_id) VALUES(@login, @password, @type, @firstname, @lastname, @address, @phone, @email, @email, @city_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
 

@@ -35,6 +35,9 @@ namespace ValaisEatWebApplication.Controllers
 
             return View(orderVM);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(OrderViewModel orderVM)
         {
             try

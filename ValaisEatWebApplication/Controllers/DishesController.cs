@@ -37,7 +37,7 @@ namespace ValaisEatWebApplication.Controllers
             IDishesManager dishesManager = new DishesManager(Configuration);
 
             var dish = dishesManager.GetDishes();
-            var dishList = new List<Dishes>();
+            var dishList = new List<Dishes>();  
 
             foreach (Dishes dishes in dish)
             {
