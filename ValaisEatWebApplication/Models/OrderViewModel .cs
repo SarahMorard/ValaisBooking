@@ -15,6 +15,7 @@ namespace ValaisEatWebApplication.Models
         public int idLogin { get; set; }
 
         //Orders
+        public int idOrders { get; set; }
         public DateTime time { get; set; }
         public int quantity { get; set; }
         public double total { get; set; }

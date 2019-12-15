@@ -1,0 +1,54 @@
+﻿@model ValaisEatWebApplication.Models.OrderViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>OrderViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idDishes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idDishes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.idLogin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idLogin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.total)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.total)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Create", "Create", new { id = Model.idOrders}) |
+    <a asp-action="Index">Back to List</a>
+</div>

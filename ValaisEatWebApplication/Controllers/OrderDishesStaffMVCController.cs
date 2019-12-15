@@ -42,7 +42,7 @@ namespace ValaisEatWebApplication.Controllers
             // Lists
             var ListODSModel = new List<OrderDishesStaffMVC>(); // The list we need to return at the end                
             var ListOD = ODManager.GetOD(CurrentStaff);         // List the dishesOrders according to the current loged staff   
-            var VerifOD = ODManager.VerifOrderDishes(CurrentStaff);
+            //var VerifOD = ODManager.VerifOrderDishes(CurrentStaff);
 
 
             // Loop

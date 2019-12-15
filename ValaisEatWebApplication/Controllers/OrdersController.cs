@@ -22,7 +22,12 @@ namespace ValaisEatWebApplication.Controllers
         //implémentation auto des id externe 
         public IActionResult Index(int idDishes)
         {
-
+            //get the session for Customer
+            if (HttpContext.Session.GetString("ursername") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            //utilisation de la view modele
             OrderViewModel orderVM = new OrderViewModel();
             orderVM.idDishes = idDishes;
             orderVM.idLogin = (int)HttpContext.Session.GetInt32("id");
