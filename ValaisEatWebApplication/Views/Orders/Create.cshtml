@@ -1,46 +1,53 @@
 ﻿@model ValaisEatWebApplication.Models.OrderViewModel
-
 @{
     ViewData["Title"] = "Create";
 }
+
+
+@using (Html.BeginForm())
+{
+
     <div class="container">
         <h2>Create</h2>
 
         <h4>OrderViewModel</h4>
         <hr />
+
         <div class="row">
             <div class="col-md-4">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="name" class="control-label"></label>
-                        <input asp-for="name" class="form-control" />
+                        <p>@ViewBag.Name</p>
                         <span asp-validation-for="name" class="text-danger"></span>
                     </div>
+                    @* The time the customer want to be delivered  *@
+                    @* Step 900: 900 second (15 min) *@
                     <div class="form-group">
                         <label asp-for="time" class="control-label"></label>
-                        <input asp-for="time" class="form-control" />
+                        <input class="form-control" type="time" step="900" min="11:00" max="20:00" name="DeliveryTime" id="DeliveryTime" required />
                         <span asp-validation-for="time" class="text-danger"></span>
                     </div>
+                    @* Set the quantity option for the dish *@
                     <div class="form-group">
                         <label asp-for="quantity" class="control-label"></label>
-                        <input asp-for="quantity" class="form-control" />
+                        <select name="Quantity" id="Quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                         <span asp-validation-for="quantity" class="text-danger"></span>
-                    </div>
+                    </div>                 
                     <div class="form-group">
-                        <label asp-for="total" class="control-label"></label>
-                        <input asp-for="total" class="form-control" />
-                        <span asp-validation-for="total" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        @* asp-action="Confirmation" : call the confirmation method in the controller *@
+                        <input asp-action="Confirmation" type="submit" value="Create" class="btn btn-default" />
                     </div>
                 </form>
             </div>
         </div>
-
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
     </div>
+}
 

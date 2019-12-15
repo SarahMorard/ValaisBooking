@@ -47,5 +47,10 @@ namespace BLL
         {
             return OrdersDB.GetOrderByFK(fk);
         }
+
+        public List<Orders> GetListOrder(int id)
+        {
+            return OrdersDB.GetListOrder(id);
+        }
     }
 }

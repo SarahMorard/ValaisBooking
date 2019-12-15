@@ -132,12 +132,12 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
 
-                    string query = "UPDATE Order_Dishes SET status = @status, order_id = @order_id, login_id=@login_id WHERE idOrder_Dishes = @id";
+                    string query = "UPDATE Order_Dishes SET status = @status WHERE idOrder_Dishes = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", order_Dishes.idOrder_Dishes);
                     cmd.Parameters.AddWithValue("@status", order_Dishes.status);
                     cmd.Parameters.AddWithValue("@order_id", order_Dishes.order_id);
-                    cmd.Parameters.AddWithValue("@login_id", order_Dishes.login_id);
+
 
 
                     cn.Open();
@@ -152,6 +152,8 @@ namespace DAL
 
             return resultat;
         }
+
+
         public int DeleteOrder_Dishes(int id)
         {
             int resultat = 0;

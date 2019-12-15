@@ -105,6 +105,8 @@ namespace DAL
             }
             return login;
         }
+
+        // Add a customer or a staff to the db depending on the type of login
         public Login AddLogin(Login login)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -211,7 +213,7 @@ namespace DAL
             return resultat;
         }
 
-        //to check the user
+        // Check if the user if valid when they try to connect
         public Login IsUserValid(string login, string password)
         {   
             string connectionString = Configuration.GetConnectionString("DefaultConnection");

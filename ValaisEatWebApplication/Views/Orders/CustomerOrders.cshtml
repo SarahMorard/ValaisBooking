@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DTO.Orders>
+
+@{
+    ViewData["Title"] = "CustomerOrders";
+}
+<div class="container">
+    <h2>Your orders</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.time)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dishes_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.login_id)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dishes_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.login_id)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-info">@Html.ActionLink("Cancel this order", "CancelOrder", new { id = item.idOrders })</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

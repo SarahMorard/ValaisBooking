@@ -33,7 +33,6 @@ namespace ValaisEatWebApplication.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
-
             IDishesManager dishesManager = new DishesManager(Configuration);
 
             var dish = dishesManager.GetDishes();
@@ -289,7 +288,7 @@ namespace ValaisEatWebApplication.Controllers
 
         }
 
-        // delete dish
+        // Delete the selected dish
         public ActionResult Delete(int id)
         {
             //get the session for staff

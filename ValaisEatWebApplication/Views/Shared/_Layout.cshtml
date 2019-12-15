@@ -50,10 +50,7 @@
                 @*BASIC DISPLAY*@
                 @{ if (Context.Session.GetString("username") == null && Context.Session.GetString("staffname") == null)
                     {
-                        <ul class="nav navbar-nav">
-                            <li><a asp-area="" asp-controller="Home" asp-action="Details">Home</a></li>
-                            <li><a asp-area="" asp-controller="Dishes" asp-action="PostDish">About</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="About">Contact</a></li>
+                        <ul class="nav navbar-nav">          
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a asp-area="" asp-controller="Login" asp-action="Create"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
@@ -67,13 +64,11 @@
                     {
 
                         <ul class="nav navbar-nav">
-                            <li><a asp-area="" asp-controller="Home" asp-action="Details">Home</a></li>
                             <li><a asp-area="" asp-controller="Restaurants" asp-action="ListRetaurants">Our Restaurants</a></li>
-                            <li><a asp-area="" asp-controller="Home" asp-action="About">Contact</a></li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a asp-area="" asp-controller="Orders" asp-action="Index"><span class="glyphicon glyphicon-briefcase"></span> My orders</a></li>
+                            <li><a asp-area="" asp-controller="Orders" asp-action="CustomerOrders"><span class="glyphicon glyphicon-briefcase"></span> My orders</a></li>
                             <li><a asp-area="" asp-controller="" asp-action=""><span class="glyphicon glyphicon-user"></span> @Context.Session.GetString("username")</a></li>
                             <li><a asp-area="" asp-controller="Login" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                         </ul>
@@ -86,8 +81,6 @@
                 @{ if (Context.Session.GetString("staffname") != null)
 
                     {
-
-
                     <ul class="nav navbar-nav">
 
                         <li><a asp-area="" asp-controller="OrderDishesStaffMVC" asp-action="DisplayOrderDishes">Orders of customers</a></li>

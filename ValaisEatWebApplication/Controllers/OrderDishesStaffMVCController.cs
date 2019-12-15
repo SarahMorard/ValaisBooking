@@ -40,37 +40,35 @@ namespace ValaisEatWebApplication.Controllers
             int CurrentStaff = (int)HttpContext.Session.GetInt32("id"); // Get the id of the current user and save it inside a variable
             
             // Lists
-            var ListODSModel = new List<OrderDishesStaffMVC>(); // The list we need to return at the end                
-            var ListOD = ODManager.GetOD(CurrentStaff);         // List the dishesOrders according to the current loged staff   
+            var ListODSModel = new List<OrderDishesStaffMVC>();         // The list we need to return at the end                
+            var ListOD = ODManager.GetOD(CurrentStaff);                 // List the dishesOrders according to the current loged staff   
 
 
             // Loop
-            // Search the values for all the tables needed for the model
-          
-                foreach (Order_Dishes Od in ListOD)
+            // Search the values for all the tables needed for the model        
+            foreach (Order_Dishes Od in ListOD)
+            {
+                if (Od.status.Equals("waiting"))                      // if the status is "waiting" it means that the order dishes was not delivered so it must appear on the list
                 {
-                    if (Od.status.Equals("waiting")) // if the status is "waiting" it means that the order dishes was not delivered so it must appear on the list
-                    {
-                        var O = OManager.GetOrderByFK(Od.order_id);       // Get one order according to the foreign key of order dishes
-                        var L = LManager.GetLoginByFK(O.login_id);        // Get one login according to the rogeign key login of the order 
-                        var ODSModelMVC = new OrderDishesStaffMVC();      // New var OrderDishesStaffMVC: new containt to put in the list each time
+                    var O = OManager.GetOrderByFK(Od.order_id);       // Get one order according to the foreign key of order dishes
+                    var L = LManager.GetLoginByFK(O.login_id);        // Get one login according to the rogeign key login of the order 
+                    var ODSModelMVC = new OrderDishesStaffMVC();      // New var OrderDishesStaffMVC: new containt to put in the list each time
 
-                        //create the model
-                        ODSModelMVC.NoOrderDishes = Od.idOrder_Dishes;
-                        ODSModelMVC.FistNameCustomer = L.firstName;
-                        ODSModelMVC.LastNameCustomer = L.lastName;
-                        ODSModelMVC.AddressDelivery = L.address;
-                        ODSModelMVC.StatusDelivery = Od.status;
-                        ODSModelMVC.TimeDelivery = O.time;
-                        ODSModelMVC.TotalOrder = O.total;
+                    // Create the model
+                    ODSModelMVC.NoOrderDishes = Od.idOrder_Dishes;
+                    ODSModelMVC.FistNameCustomer = L.firstName;
+                    ODSModelMVC.LastNameCustomer = L.lastName;
+                    ODSModelMVC.AddressDelivery = L.address;
+                    ODSModelMVC.StatusDelivery = Od.status;
+                    ODSModelMVC.TimeDelivery = O.time;
+                    ODSModelMVC.TotalOrder = O.total;
 
-                        ListODSModel.Add(ODSModelMVC); // Fill the list of the ODSModel 
-                    }
-                }        
+                    ListODSModel.Add(ODSModelMVC);                    // Fill the list of the ODSModel 
+                }
+            }        
             return View(ListODSModel);
         }
 
-        // 1 list 2 edits
         // List the order dishes
         public ActionResult ListOD()
         {
@@ -80,9 +78,9 @@ namespace ValaisEatWebApplication.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
-            int CurrentStaff = (int)HttpContext.Session.GetInt32("id"); // Get the id of the current user and save it inside a variable
+            int CurrentStaff = (int)HttpContext.Session.GetInt32("id");         // Get the id of the current user and save it inside a variable
             var ODManager = new Order_DishesManager(Configuration);
-            var ListOD = ODManager.GetOD(CurrentStaff);                 // List the dishesOrders according to the current loged staff 
+            var ListOD = ODManager.GetOD(CurrentStaff);                         // List the dishesOrders according to the current loged staff 
 
             return View(ListOD);
         }
@@ -97,28 +95,13 @@ namespace ValaisEatWebApplication.Controllers
             }
 
             IOrder_DishesManager ODManager = new Order_DishesManager(Configuration);
-            var OD = ODManager.GetOrder_DishesId(id);       // Get the order dishes that was retrived from the list
 
-            return View(OD);                                // Return the order dishes previously retrived
-        }
+            var OD = ODManager.GetOrder_DishesId(id);                                 // Get the dishes that was selected
+            OD.status = "delivered";                                                  // Set its status to "delivered"
+            ODManager.UpdateOrder_Dishes(OD);                                         // Update the status of the order dishes that was delivered
 
-        //post the new edited dish
-        [HttpPost]
-        public ActionResult Archive(DTO.Order_Dishes od)
-        {
-            //get the session for staff
-            if (HttpContext.Session.GetString("staffname") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
 
-            IOrder_DishesManager ODManager = new Order_DishesManager(Configuration);
-            ODManager.UpdateOrder_Dishes(od);
-
-           
-
-            return RedirectToAction(nameof(DisplayOrderDishes));
-
-        }
+            return RedirectToAction(nameof(DisplayOrderDishes));                      // Redirection to the list of order dishes that the logged staff has to deliver              
+        }   
     }
 }

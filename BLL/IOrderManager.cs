@@ -15,5 +15,6 @@ namespace BLL
         int UpdateOrders(Orders order);
         int DeleteOrders(int IdOrder);
         Orders GetOrderByFK(int fk);
+        List<Orders> GetListOrder(int id);
     }
 }
