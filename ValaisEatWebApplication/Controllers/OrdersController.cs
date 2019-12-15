@@ -23,7 +23,7 @@ namespace ValaisEatWebApplication.Controllers
         public IActionResult Index(int idDishes)
         {
             //get the session for customer
-            if (HttpContext.Session.GetString("ursername") == null)
+            if (HttpContext.Session.GetString("username") == null)
             {
                 return RedirectToAction("Index", "Login");
             }
@@ -42,9 +42,7 @@ namespace ValaisEatWebApplication.Controllers
                 // Set Total
                 // TODO: Add insert logic here
                 IOrderManager oMan = new OrdersManager(Configuration);
-
-               
-                
+      
                 //Implementation de mon Order
                 DTO.Orders O = new Orders();  // New Order
 
@@ -52,7 +50,7 @@ namespace ValaisEatWebApplication.Controllers
                 O.login_id = orderVM.idLogin;
                 O.time = orderVM.time;
                 O.quantity = orderVM.quantity;
-                O.total = orderVM.total*orderVM.price;  // Total calculated
+                O.total = orderVM.quantity*orderVM.price;  // Total calculated
                 //Mettre dans la base de donée 
                 oMan.AddOrders(O);
                 
