@@ -31,7 +31,7 @@
                 </td>
                 <td>
 
-                    <button type="button" class="btn btn-primary">Ordering Now</button>
+                    <button type="button" class="btn btn-primary">@Html.ActionLink("Order", "Create", "Orders", new { id = item.idDishes })</button>
                 </td>
             </tr>
         }
