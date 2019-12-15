@@ -53,7 +53,10 @@ namespace BLL
             return Order_DishesDB.GetOD(id);
         }
 
-
+        public bool VerifOrderDishes(int id)
+        {
+            return Order_DishesDB.VerifOrderDishes(id);
+        }
 
     }
 }

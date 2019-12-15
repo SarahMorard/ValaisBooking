@@ -113,26 +113,25 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Insert into [Login](login, password, type, firstName, lastName, address, phone, email, city_id) values(@login, @password, @type, @firstName, @lastName, @address, @phone, @email, @city_id); SELECT SCOPE_IDENTITY()";
+                    string query = "Insert into Login(login, password, type, firstname, lastname, address, phone, email, city_id) values(@login, @password, @type, @firstname, @lastname, @address, @phone, @email, @email,city_id); SELECT SCOPE_IDENTITY()";
 
                     SqlCommand cmd = new SqlCommand(query, cn);
-
-                  
 
                     cmd.Parameters.AddWithValue("@login", login.login);
                     cmd.Parameters.AddWithValue("@password", login.password);
                     cmd.Parameters.AddWithValue("@type", login.type);
-                    cmd.Parameters.AddWithValue("@firstName", login.firstName);
-                    cmd.Parameters.AddWithValue("@lastName", login.lastName);
+                    cmd.Parameters.AddWithValue("@firstname", login.firstName);
+                    cmd.Parameters.AddWithValue("@lastname", login.lastName);
                     cmd.Parameters.AddWithValue("@address", login.address);
                     cmd.Parameters.AddWithValue("@phone", login.phone);
                     cmd.Parameters.AddWithValue("@email", login.email);
                     cmd.Parameters.AddWithValue("@city_id", login.city_id);
-                 
+
 
                     cn.Open();
 
                     login.idLogin = Convert.ToInt32(cmd.ExecuteScalar());
+
 
                 }
             }

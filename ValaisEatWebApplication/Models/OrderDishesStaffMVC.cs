@@ -16,6 +16,7 @@ namespace ValaisEatWebApplication.Models
 {
     public class OrderDishesStaffMVC
     {
+        public int NoOrderDishes { get; set; }
         public string LastNameCustomer { get; set; }
         public string FistNameCustomer { get; set; }
         public string AddressDelivery { get; set; }

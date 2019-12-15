@@ -25,50 +25,55 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult DisplayOrderDishes()
         {
-            //get the session for staff
+            // Get the session for staff
             if (HttpContext.Session.GetString("staffname") == null)
             {
                 return RedirectToAction("Index", "Login");
             }
 
-            //managers for the actions of each table required to make the OrderDishesStaffMVC
+            // Managers for the actions of each table required to make the OrderDishesStaffMVC
             var ODManager = new Order_DishesManager(Configuration);
             var OManager = new OrdersManager(Configuration);
             var LManager = new LoginManager(Configuration);
 
-            //variables  
-            int CurrentStaff = (int)HttpContext.Session.GetInt32("id"); //get the id of the current user and save it inside a variable
+            // Variables  
+            int CurrentStaff = (int)HttpContext.Session.GetInt32("id"); // Get the id of the current user and save it inside a variable
             
-            //lists
-            var ListODSModel = new List<OrderDishesStaffMVC>(); //the list we need to return at the end                
-            var ListOD = ODManager.GetOD(CurrentStaff);         //List the dishesOrders according to the current loged staff
-           
+            // Lists
+            var ListODSModel = new List<OrderDishesStaffMVC>(); // The list we need to return at the end                
+            var ListOD = ODManager.GetOD(CurrentStaff);         // List the dishesOrders according to the current loged staff   
+            var VerifOD = ODManager.VerifOrderDishes(CurrentStaff);
 
+
+            // Loop
             // Search the values for all the tables needed for the model
-            foreach (Order_Dishes Od in ListOD)
-            {
-                var O = OManager.GetOrderByFK(Od.order_id);       //get one order according to the foreign key of order dishes
-                var L = LManager.GetLoginByFK(O.login_id);        //get one login according to the rogeign key login of the order 
-                var ODSModelMVC = new OrderDishesStaffMVC();      // new var OrderDishesStaffMVC: new containt to put in the list each time
+          
+                foreach (Order_Dishes Od in ListOD)
+                {
+                    if (Od.status.Equals("waiting")) // if the status is "waiting" it means that the order dishes was not delivered so it must appear on the list
+                    {
+                        var O = OManager.GetOrderByFK(Od.order_id);       // Get one order according to the foreign key of order dishes
+                        var L = LManager.GetLoginByFK(O.login_id);        // Get one login according to the rogeign key login of the order 
+                        var ODSModelMVC = new OrderDishesStaffMVC();      // New var OrderDishesStaffMVC: new containt to put in the list each time
 
-                //create the model
-                ODSModelMVC.FistNameCustomer = L.firstName;
-                ODSModelMVC.LastNameCustomer = L.lastName;
-                ODSModelMVC.AddressDelivery  = L.address;
-                ODSModelMVC.StatusDelivery   = Od.status;
-                ODSModelMVC.TimeDelivery     = O.time;
-                ODSModelMVC.TotalOrder       = O.total;
+                        //create the model
+                        ODSModelMVC.NoOrderDishes = Od.idOrder_Dishes;
+                        ODSModelMVC.FistNameCustomer = L.firstName;
+                        ODSModelMVC.LastNameCustomer = L.lastName;
+                        ODSModelMVC.AddressDelivery = L.address;
+                        ODSModelMVC.StatusDelivery = Od.status;
+                        ODSModelMVC.TimeDelivery = O.time;
+                        ODSModelMVC.TotalOrder = O.total;
 
-                ListODSModel.Add(ODSModelMVC); // Fill the list of the ODSModel            
-            }
+                        ListODSModel.Add(ODSModelMVC); // Fill the list of the ODSModel 
+                    }
+                }        
             return View(ListODSModel);
         }
 
-        
-
-
-        //update status
-        public ActionResult UpdateStatus()
+        // 1 list 2 edits
+        // List the order dishes
+        public ActionResult ListOD()
         {
             //get the session for staff
             if (HttpContext.Session.GetString("staffname") == null)
@@ -76,7 +81,45 @@ namespace ValaisEatWebApplication.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
-            return View();
+            int CurrentStaff = (int)HttpContext.Session.GetInt32("id"); // Get the id of the current user and save it inside a variable
+            var ODManager = new Order_DishesManager(Configuration);
+            var ListOD = ODManager.GetOD(CurrentStaff);                 // List the dishesOrders according to the current loged staff 
+
+            return View(ListOD);
+        }
+
+        // Edit the selected dish
+        public ActionResult Archive(int id)
+        {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            IOrder_DishesManager ODManager = new Order_DishesManager(Configuration);
+            var OD = ODManager.GetOrder_DishesId(id);       
+
+            return View(OD);
+        }
+
+        //post the new edited dish
+        [HttpPost]
+        public ActionResult Archive(DTO.Order_Dishes od)
+        {
+            //get the session for staff
+            if (HttpContext.Session.GetString("staffname") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            IOrder_DishesManager ODManager = new Order_DishesManager(Configuration);
+            ODManager.UpdateOrder_Dishes(od);
+
+           
+
+            return RedirectToAction(nameof(DisplayOrderDishes));
+
         }
     }
 }

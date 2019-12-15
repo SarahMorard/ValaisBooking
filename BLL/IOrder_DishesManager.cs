@@ -15,5 +15,6 @@ namespace BLL
         int UpdateOrder_Dishes(Order_Dishes order_dishes);
         int DeleteOrder_Dishes(int IdOrder_Dishes);
         List<Order_Dishes> GetOD(int id);
+        bool VerifOrderDishes(int id);
     }
 }
