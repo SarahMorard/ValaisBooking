@@ -178,7 +178,7 @@ namespace ValaisEatWebApplication.Controllers
             }
             catch
             {
-                return View();
+                return View();                                                  
             }
         }
     }
