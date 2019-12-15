@@ -25,6 +25,13 @@
         {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.idDishes)
+            </td>
+            <td>
+                <!--Formulaire pour le post exemple edit.cshtml de valais booking
+                     et élément caché-->
+                
+                
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
@@ -33,7 +40,7 @@
             <td>
             </td>
             <td>
-                <button type="button" class="btn btn-primary">Ordering Now</button>
+                <a href="@Url.Action("RemoveAllItems", "", new{ id = item.idDishes })" class="btn btn-primary"> Ordering Now</a> 
             </td>
             
         </tr>
