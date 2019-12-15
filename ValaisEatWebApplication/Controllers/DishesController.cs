@@ -255,6 +255,18 @@ namespace ValaisEatWebApplication.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
+            var restoManager = new RestaurantManager(Configuration);
+            var restaurants = restoManager.GetRestaurants();
+
+            var resto = new List<SelectListItem>(); // Create a selected list with all the city in the db for the client to chose
+
+            foreach (Restaurants r in restaurants)
+            {
+                resto.Add(new SelectListItem { Value = r.idRestaurant.ToString(), Text = r.name }); // Add the cities to a SelectListItem ot diplay them for the customer
+            }
+
+            ViewBag.Cities = resto; // Put the list in the ViewBag
+
             return View();
         }
 

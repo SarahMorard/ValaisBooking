@@ -10,12 +10,13 @@ namespace ValaisEatWebApplication.Models
         //Dish
         public int idDishes { get; set; }
         public string name { get; set; }
+        public double price { get; set; }
 
         //Login
         public int idLogin { get; set; }
 
         //Orders
-        public int idOrders { get; set; }
+        public int idOrder { get; set; }
         public DateTime time { get; set; }
         public int quantity { get; set; }
         public double total { get; set; }
