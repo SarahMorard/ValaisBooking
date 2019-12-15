@@ -52,7 +52,7 @@ namespace ValaisEatWebApplication.Controllers
                 O.login_id = orderVM.idLogin;
                 O.time = orderVM.time;
                 O.quantity = orderVM.quantity;
-                O.total = orderVM.total*orderVM.price;  // Total calculated
+                O.total = orderVM.quantity*orderVM.price;  // Total calculated
                 //Mettre dans la base de donée 
                 oMan.AddOrders(O);
                 
