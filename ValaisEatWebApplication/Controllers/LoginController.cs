@@ -73,52 +73,48 @@ namespace ValaisEatWebApplication.Controllers
             var ctiyManager = new CitiesManager(Configuration);
             var city = ctiyManager.GetCities();
 
-            var cities = new List<SelectListItem>();
+            var cities = new List<SelectListItem>(); // Create a selected list with all the city in the db for the client to chose
 
             foreach (Cities c in city)
             {
-                cities.Add(new SelectListItem { Value = c.idCities.ToString(), Text = c.name }); //add the cities to a SelectListItem
+                cities.Add(new SelectListItem { Value = c.idCities.ToString(), Text = c.name }); // Add the cities to a SelectListItem ot diplay them for the customer
             }
 
-            ViewBag.Cities = cities;
+            ViewBag.Cities = cities; // Put the list in the ViewBag
             return View();
         }
 
 
         //create a new customer
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Login login)
         {
             var loginManager = new LoginManager(Configuration);
 
-            try
-            {
-                loginManager.AddLogin(login);
-                return RedirectToAction("Login", "Create");
-            }
-            catch
-            {
-                return RedirectToAction(nameof(Create));
+            loginManager.AddLogin(login);
+            //return RedirectToAction("Login", "Create");
+        
+            return RedirectToAction(nameof(Success));
 
-            }
 
 
         }
 
 
-        //if the account was successfully created, the customer will be redirected to this page
+        // If the account was successfully created, the customer will be redirected to this page
         public ActionResult Confirmation()
         {
             return View();
         }
 
-        //if the login customer was successful, redirection to page Success
+        // If the login customer was successful, redirection to page Success
         public IActionResult Success()
         {
             return View();
         }
 
-        //if the login staff was successful, redirection to page Success
+        // If the login staff was successful, redirection to page Success
         public IActionResult SuccessStaff()
         {
             return View();
