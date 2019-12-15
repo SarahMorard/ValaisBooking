@@ -154,6 +154,7 @@ namespace DAL
 
             return resultat;
         }
+        
         public int DeleteOrders(int id)
         {
             int resultat = 0;

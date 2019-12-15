@@ -96,12 +96,35 @@ namespace ValaisEatWebApplication.Controllers
 
 
             /*** ORDER DISHES ***/
+            IOrder_DishesManager ODMan = new Order_DishesManager(Configuration);
+            ILoginManager loginManager = new LoginManager(Configuration);
             DTO.Order_Dishes OD = new Order_Dishes();                                     // Create a new object order dishes
-
+            var ListLogin = loginManager.GetLogins();
             OD.order_id = ORDER.idOrders;                                                 // Set the foreign key with the primary key of the pevious order made
+            OD.login_id = 1;
 
-            OD.login_id = 1;                                                              // Set login to 1 for a test
 
+           /* foreach (Login log in ListLogin)                                               // Distinct StaffID Login
+            {
+                if (log.type.Equals("staff"))                                             
+                {
+                    int CountOrder = ODMan.Count_Order(log.idLogin);
+                    
+                    if (CountOrder > 5)                                                 //Verification of the number of order dishes per staff
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        OD.login_id = log.idLogin;
+                    }
+
+                   
+                }
+            }
+            */
+                                                                      // Set login to 1 for a test
+            
 
             HttpContext.Session.SetString("TotalOrder", TQString);                        // Put the model inside a session in order to use it late
 

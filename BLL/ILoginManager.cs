@@ -9,7 +9,7 @@ namespace BLL
     public interface ILoginManager
     {
         ILoginManager LoginDB { get; }
-        List<Login> GetLogin();
+        List<Login> GetLogins();
         Login GetLoginId(int id);
         Login AddLogin(Login login);
         int UpdateLogin(Login login);

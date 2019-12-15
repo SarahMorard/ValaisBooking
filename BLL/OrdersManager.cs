@@ -37,7 +37,7 @@ namespace BLL
         {
             return OrdersDB.UpdateOrders(order);
         }
-
+        
         public int DeleteOrders(int IdOrder)
         {
             return OrdersDB.DeleteOrders(IdOrder);

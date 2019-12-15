@@ -11,6 +11,7 @@ namespace DAL
         Order_Dishes GetOrder_DishesId(int idOrder_Dishes);
         Order_Dishes AddOrder_Dishes(Order_Dishes order_Dishes);
         int UpdateOrder_Dishes(Order_Dishes order_Dishes);
+        int Count_Order(int id);
         int DeleteOrder_Dishes(int id);
         List<Order_Dishes> GetOD(int id);
         bool VerifOrderDishes(int id);

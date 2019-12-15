@@ -25,6 +25,7 @@ namespace ValaisEatWebApplication.Controllers
         [HttpGet]
         public ActionResult DisplayOrderDishes()
         {
+           
             // Get the session for staff
             if (HttpContext.Session.GetString("staffname") == null)
             {
@@ -35,6 +36,7 @@ namespace ValaisEatWebApplication.Controllers
             var ODManager = new Order_DishesManager(Configuration);
             var OManager = new OrdersManager(Configuration);
             var LManager = new LoginManager(Configuration);
+            
 
             // Variables  
             int CurrentStaff = (int)HttpContext.Session.GetInt32("id"); // Get the id of the current user and save it inside a variable
@@ -51,7 +53,7 @@ namespace ValaisEatWebApplication.Controllers
                 if (Od.status.Equals("waiting"))                      // if the status is "waiting" it means that the order dishes was not delivered so it must appear on the list
                 {
                     var O = OManager.GetOrderByFK(Od.order_id);       // Get one order according to the foreign key of order dishes
-                    var L = LManager.GetLoginByFK(O.login_id);        // Get one login according to the rogeign key login of the order 
+                    var L = LManager.GetLoginByFK(O.login_id);        // Get one login according to the foreign key login of the order 
                     var ODSModelMVC = new OrderDishesStaffMVC();      // New var OrderDishesStaffMVC: new containt to put in the list each time
 
                     // Create the model

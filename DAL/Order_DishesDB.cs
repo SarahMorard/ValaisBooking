@@ -152,6 +152,29 @@ namespace DAL
 
             return resultat;
         }
+        public int Count_Order(int id)
+        {
+            int resultat = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Count(*) FROM Order_Dishes WHERE login_id=@id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cn.Open();
+
+                    resultat = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return resultat;
+        }
 
 
         public int DeleteOrder_Dishes(int id)

@@ -38,6 +38,10 @@ namespace BLL
             return Order_DishesDB.UpdateOrder_Dishes(order_Dishes);
         }
 
+        public int Count_Order(int id)
+        {
+            return Order_DishesDB.Count_Order(id);
+        }
         public int DeleteOrder_Dishes(int IdOrder_Dishes)
         {
             return Order_DishesDB.DeleteOrder_Dishes(IdOrder_Dishes);

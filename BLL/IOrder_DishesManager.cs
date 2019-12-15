@@ -13,6 +13,7 @@ namespace BLL
         Order_Dishes GetOrder_DishesId(int id);
         Order_Dishes AddOrder_Dishes(Order_Dishes order_dishes);
         int UpdateOrder_Dishes(Order_Dishes order_dishes);
+        int Count_Order(int id);
         int DeleteOrder_Dishes(int IdOrder_Dishes);
         List<Order_Dishes> GetOD(int id);
         bool VerifOrderDishes(int id);
